@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.quick.spring.boot.manage.dao.mapper.MiddleRoleDepartmentMapper">
+  <resultMap id="BaseResultMap" type="com.github.quick.spring.boot.manage.dao.entity.MiddleRoleDepartment">
+    <!--@mbg.generated-->
+    <!--@Table middle_role_department-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="role_id" jdbcType="BIGINT" property="roleId" />
+    <result column="department_id" jdbcType="BIGINT" property="departmentId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, role_id, department_id
+  </sql>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update middle_role_department
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="role_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.roleId,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="department_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.departmentId,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update middle_role_department
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="role_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.roleId != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.roleId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="department_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.departmentId != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.departmentId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" parameterType="map">
+    <!--@mbg.generated-->
+    insert into middle_role_department
+    (id, role_id, department_id)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.id,jdbcType=BIGINT}, #{item.roleId,jdbcType=BIGINT}, #{item.departmentId,jdbcType=BIGINT}
+        )
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" parameterType="com.github.quick.spring.boot.manage.dao.entity.MiddleRoleDepartment">
+    <!--@mbg.generated-->
+    insert into middle_role_department
+    (id, role_id, department_id)
+    values
+    (#{id,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{departmentId,jdbcType=BIGINT}
+      )
+    on duplicate key update 
+    id = #{id,jdbcType=BIGINT}, 
+    role_id = #{roleId,jdbcType=BIGINT}, 
+    department_id = #{departmentId,jdbcType=BIGINT}
+  </insert>
+  <insert id="insertOrUpdateSelective" parameterType="com.github.quick.spring.boot.manage.dao.entity.MiddleRoleDepartment">
+    <!--@mbg.generated-->
+    insert into middle_role_department
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="departmentId != null">
+        department_id,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="departmentId != null">
+        #{departmentId,jdbcType=BIGINT},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="departmentId != null">
+        department_id = #{departmentId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>
