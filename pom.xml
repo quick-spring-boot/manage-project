@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2020-present quick-spring-boot All rights reserved.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -14,6 +30,7 @@
 		<module>manage-dao</module>
 		<module>manage-feign</module>
 		<module>manage-service</module>
+		<module>manage-common</module>
 	</modules>
 	<properties>
 		<java.version>8</java.version>
@@ -25,7 +42,12 @@
 		<hibernate.validator.version>6.1.5.Final</hibernate.validator.version>
 		<commons-lang3.version>3.11</commons-lang3.version>
 		<commons-collections4.version>4.1</commons-collections4.version>
-		<springfox.version>3.0.0</springfox.version>
+		<mybatis-plus-boot-starter.version>3.4.0</mybatis-plus-boot-starter.version>
+		<springfox-boot-starter.version>3.0.0</springfox-boot-starter.version>
+		<druid.version>1.1.20</druid.version>
+		<logback-classic.version>1.0.7</logback-classic.version>
+		<slf4j-api.version>1.7.25</slf4j-api.version>
+		<java-jwt.version>3.4.1</java-jwt.version>
 	</properties>
 
 	<dependencyManagement>
@@ -80,29 +102,35 @@
 			<dependency>
 				<groupId>com.baomidou</groupId>
 				<artifactId>mybatis-plus-boot-starter</artifactId>
-				<version>3.4.0</version>
-			</dependency>
-			<dependency>
-				<groupId>mysql</groupId>
-				<artifactId>mysql-connector-java</artifactId>
-				<version>5.1.48</version>
+				<version>${mybatis-plus-boot-starter.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>io.springfox</groupId>
 				<artifactId>springfox-boot-starter</artifactId>
-				<version>3.0.0</version>
+				<version>${springfox-boot-starter.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>com.alibaba</groupId>
 				<artifactId>druid</artifactId>
-				<version>1.1.20</version>
+				<version>${druid.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-classic</artifactId>
-				<version>1.0.7</version>
+				<version>${logback-classic.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j-api.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.auth0</groupId>
+				<artifactId>java-jwt</artifactId>
+				<version>${java-jwt.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -118,7 +146,6 @@
 					<target>${maven.compiler.target}</target>
 				</configuration>
 			</plugin>
-
 
 
 			<plugin>
