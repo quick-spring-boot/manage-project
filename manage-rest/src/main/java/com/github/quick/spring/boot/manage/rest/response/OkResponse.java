@@ -14,45 +14,39 @@
  * limitations under the License.
  */
 
-package com.github.quick.spring.boot.manage.model.vo;
+package com.github.quick.spring.boot.manage.rest.response;
 
-public class ResultVo<T> {
-	private int code;
+import com.github.quick.spring.boot.manage.model.vo.ResultVo;
 
-	private String message;
+public enum OkResponse {
+	SAVE_SUCCESS(200, "保存成功"),
+	UPDATE_SUCCESS(200, "更新成功"),
+	HEALTHY_SUCCESS(200, "健康"),
+	;
 
-	private T data;
+	private final int code;
 
-	public ResultVo() {
-	}
+	private final String message;
 
-	public ResultVo(int code, String message, T data) {
+	OkResponse(int code, String message) {
 		this.code = code;
 		this.message = message;
-		this.data = data;
 	}
 
 	public int getCode() {
 		return code;
 	}
 
-	public void setCode(int code) {
-		this.code = code;
-	}
-
 	public String getMessage() {
 		return message;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public <T> ResultVo<T> ret(T data) {
+		return new ResultVo<>(this.getCode(), this.getMessage(), data);
 	}
 
-	public T getData() {
-		return data;
+	public <T> ResultVo<T> ret() {
+		return new ResultVo<>(this.getCode(), this.getMessage(), null);
 	}
 
-	public void setData(T data) {
-		this.data = data;
-	}
 }

@@ -14,24 +14,35 @@
  * limitations under the License.
  */
 
-package com.github.quick.spring.boot.manage.dao.mapper;
+package com.github.quick.spring.boot.manage.rest.response;
 
-import java.util.List;
+import com.github.quick.spring.boot.manage.model.vo.ResultVo;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.github.quick.spring.boot.manage.dao.entity.ManagerUser;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
+public enum ErrorResponse {
+	SAVE_FAIL(200, "保存失败"),
+	UPDATE_FAIL(200, "更新失败"),
+	;
 
-@Mapper
-public interface ManagerUserMapper extends BaseMapper<ManagerUser> {
-	int updateBatch(List<ManagerUser> list);
+	private final int code;
 
-	int updateBatchSelective(List<ManagerUser> list);
+	private final String message;
 
-	int batchInsert(@Param("list") List<ManagerUser> list);
+	ErrorResponse(int code, String message) {
+		this.code = code;
+		this.message = message;
+	}
 
-	int insertOrUpdate(ManagerUser record);
+	public int getCode() {
+		return code;
+	}
 
-	int insertOrUpdateSelective(ManagerUser record);
+	public String getMessage() {
+		return message;
+	}
+
+
+	public <T> ResultVo<T> ret(T data) {
+		return new ResultVo<>(this.code, this.message, data);
+	}
+
 }

@@ -14,24 +14,25 @@
  * limitations under the License.
  */
 
-package com.github.quick.spring.boot.manage.dao.mapper;
+package com.github.quick.spring.boot.manage.common.ex;
 
-import java.util.List;
+public class ManagerCommonException extends RuntimeException {
+	public ManagerCommonException() {
+	}
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.github.quick.spring.boot.manage.dao.entity.ManagerUser;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
+	public ManagerCommonException(String message) {
+		super(message);
+	}
 
-@Mapper
-public interface ManagerUserMapper extends BaseMapper<ManagerUser> {
-	int updateBatch(List<ManagerUser> list);
+	public ManagerCommonException(String message, Throwable cause) {
+		super(message, cause);
+	}
 
-	int updateBatchSelective(List<ManagerUser> list);
+	public ManagerCommonException(Throwable cause) {
+		super(cause);
+	}
 
-	int batchInsert(@Param("list") List<ManagerUser> list);
-
-	int insertOrUpdate(ManagerUser record);
-
-	int insertOrUpdateSelective(ManagerUser record);
+	public ManagerCommonException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+		super(message, cause, enableSuppression, writableStackTrace);
+	}
 }

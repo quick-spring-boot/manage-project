@@ -1,263 +1,281 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2020-present quick-spring-boot All rights reserved.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.github.quick.spring.boot.manage.dao.mapper.ManagerDepartmentMapper">
-  <resultMap id="BaseResultMap" type="com.github.quick.spring.boot.manage.dao.entity.ManagerDepartment">
-    <!--@mbg.generated-->
-    <!--@Table manager_department-->
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="pid" jdbcType="BIGINT" property="pid" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="create_user" jdbcType="BIGINT" property="createUser" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="update_user" jdbcType="BIGINT" property="updateUser" />
-    <result column="version" jdbcType="BIGINT" property="version" />
-    <result column="deleted" jdbcType="TINYINT" property="deleted" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    id, pid, `name`, create_time, create_user, update_time, update_user, version, deleted
-  </sql>
-  <update id="updateBatch" parameterType="java.util.List">
-    <!--@mbg.generated-->
-    update manager_department
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="pid = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.pid,jdbcType=BIGINT}
-        </foreach>
-      </trim>
-      <trim prefix="`name` = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.name,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="create_time = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
-        </foreach>
-      </trim>
-      <trim prefix="create_user = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.createUser,jdbcType=BIGINT}
-        </foreach>
-      </trim>
-      <trim prefix="update_time = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.updateTime,jdbcType=TIMESTAMP}
-        </foreach>
-      </trim>
-      <trim prefix="update_user = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.updateUser,jdbcType=BIGINT}
-        </foreach>
-      </trim>
-      <trim prefix="version = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.version,jdbcType=BIGINT}
-        </foreach>
-      </trim>
-      <trim prefix="deleted = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.deleted,jdbcType=TINYINT}
-        </foreach>
-      </trim>
-    </trim>
-    where id in
-    <foreach close=")" collection="list" item="item" open="(" separator=", ">
-      #{item.id,jdbcType=BIGINT}
-    </foreach>
-  </update>
-  <update id="updateBatchSelective" parameterType="java.util.List">
-    <!--@mbg.generated-->
-    update manager_department
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="pid = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.pid != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.pid,jdbcType=BIGINT}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="`name` = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.name != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.name,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="create_time = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.createTime != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="create_user = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.createUser != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.createUser,jdbcType=BIGINT}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="update_time = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.updateTime != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.updateTime,jdbcType=TIMESTAMP}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="update_user = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.updateUser != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.updateUser,jdbcType=BIGINT}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="version = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.version != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.version,jdbcType=BIGINT}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="deleted = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.deleted != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.deleted,jdbcType=TINYINT}
-          </if>
-        </foreach>
-      </trim>
-    </trim>
-    where id in
-    <foreach close=")" collection="list" item="item" open="(" separator=", ">
-      #{item.id,jdbcType=BIGINT}
-    </foreach>
-  </update>
-  <insert id="batchInsert" parameterType="map">
-    <!--@mbg.generated-->
-    insert into manager_department
-    (id, pid, `name`, create_time, create_user, update_time, update_user, version, deleted
-      )
-    values
-    <foreach collection="list" item="item" separator=",">
-      (#{item.id,jdbcType=BIGINT}, #{item.pid,jdbcType=BIGINT}, #{item.name,jdbcType=VARCHAR}, 
-        #{item.createTime,jdbcType=TIMESTAMP}, #{item.createUser,jdbcType=BIGINT}, #{item.updateTime,jdbcType=TIMESTAMP}, 
-        #{item.updateUser,jdbcType=BIGINT}, #{item.version,jdbcType=BIGINT}, #{item.deleted,jdbcType=TINYINT}
-        )
-    </foreach>
-  </insert>
-  <insert id="insertOrUpdate" parameterType="com.github.quick.spring.boot.manage.dao.entity.ManagerDepartment">
-    <!--@mbg.generated-->
-    insert into manager_department
-    (id, pid, `name`, create_time, create_user, update_time, update_user, version, deleted
-      )
-    values
-    (#{id,jdbcType=BIGINT}, #{pid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{createUser,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}, 
-      #{version,jdbcType=BIGINT}, #{deleted,jdbcType=TINYINT})
-    on duplicate key update 
-    id = #{id,jdbcType=BIGINT}, 
-    pid = #{pid,jdbcType=BIGINT}, 
-    `name` = #{name,jdbcType=VARCHAR}, 
-    create_time = #{createTime,jdbcType=TIMESTAMP}, 
-    create_user = #{createUser,jdbcType=BIGINT}, 
-    update_time = #{updateTime,jdbcType=TIMESTAMP}, 
-    update_user = #{updateUser,jdbcType=BIGINT}, 
-    version = #{version,jdbcType=BIGINT}, 
-    deleted = #{deleted,jdbcType=TINYINT}
-  </insert>
-  <insert id="insertOrUpdateSelective" parameterType="com.github.quick.spring.boot.manage.dao.entity.ManagerDepartment">
-    <!--@mbg.generated-->
-    insert into manager_department
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="pid != null">
-        pid,
-      </if>
-      <if test="name != null">
-        `name`,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="createUser != null">
-        create_user,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
-      <if test="updateUser != null">
-        update_user,
-      </if>
-      <if test="version != null">
-        version,
-      </if>
-      <if test="deleted != null">
-        deleted,
-      </if>
-    </trim>
-    values
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="pid != null">
-        #{pid,jdbcType=BIGINT},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createUser != null">
-        #{createUser,jdbcType=BIGINT},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateUser != null">
-        #{updateUser,jdbcType=BIGINT},
-      </if>
-      <if test="version != null">
-        #{version,jdbcType=BIGINT},
-      </if>
-      <if test="deleted != null">
-        #{deleted,jdbcType=TINYINT},
-      </if>
-    </trim>
-    on duplicate key update 
-    <trim suffixOverrides=",">
-      <if test="id != null">
-        id = #{id,jdbcType=BIGINT},
-      </if>
-      <if test="pid != null">
-        pid = #{pid,jdbcType=BIGINT},
-      </if>
-      <if test="name != null">
-        `name` = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createUser != null">
-        create_user = #{createUser,jdbcType=BIGINT},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateUser != null">
-        update_user = #{updateUser,jdbcType=BIGINT},
-      </if>
-      <if test="version != null">
-        version = #{version,jdbcType=BIGINT},
-      </if>
-      <if test="deleted != null">
-        deleted = #{deleted,jdbcType=TINYINT},
-      </if>
-    </trim>
-  </insert>
+	<resultMap id="BaseResultMap" type="com.github.quick.spring.boot.manage.dao.entity.ManagerDepartment">
+		<!--@mbg.generated-->
+		<!--@Table manager_department-->
+		<id column="id" jdbcType="BIGINT" property="id"/>
+		<result column="pid" jdbcType="BIGINT" property="pid"/>
+		<result column="name" jdbcType="VARCHAR" property="name"/>
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+		<result column="create_user" jdbcType="BIGINT" property="createUser"/>
+		<result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+		<result column="update_user" jdbcType="BIGINT" property="updateUser"/>
+		<result column="version" jdbcType="BIGINT" property="version"/>
+		<result column="deleted" jdbcType="TINYINT" property="deleted"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		<!--@mbg.generated-->
+		id, pid, `name`, create_time, create_user, update_time, update_user, version, deleted
+	</sql>
+	<update id="updateBatch" parameterType="java.util.List">
+		<!--@mbg.generated-->
+		update manager_department
+		<trim prefix="set" suffixOverrides=",">
+			<trim prefix="pid = case" suffix="end,">
+				<foreach collection="list" index="index" item="item">
+					when id = #{item.id,jdbcType=BIGINT} then #{item.pid,jdbcType=BIGINT}
+				</foreach>
+			</trim>
+			<trim prefix="`name` = case" suffix="end,">
+				<foreach collection="list" index="index" item="item">
+					when id = #{item.id,jdbcType=BIGINT} then #{item.name,jdbcType=VARCHAR}
+				</foreach>
+			</trim>
+			<trim prefix="create_time = case" suffix="end,">
+				<foreach collection="list" index="index" item="item">
+					when id = #{item.id,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+				</foreach>
+			</trim>
+			<trim prefix="create_user = case" suffix="end,">
+				<foreach collection="list" index="index" item="item">
+					when id = #{item.id,jdbcType=BIGINT} then #{item.createUser,jdbcType=BIGINT}
+				</foreach>
+			</trim>
+			<trim prefix="update_time = case" suffix="end,">
+				<foreach collection="list" index="index" item="item">
+					when id = #{item.id,jdbcType=BIGINT} then #{item.updateTime,jdbcType=TIMESTAMP}
+				</foreach>
+			</trim>
+			<trim prefix="update_user = case" suffix="end,">
+				<foreach collection="list" index="index" item="item">
+					when id = #{item.id,jdbcType=BIGINT} then #{item.updateUser,jdbcType=BIGINT}
+				</foreach>
+			</trim>
+			<trim prefix="version = case" suffix="end,">
+				<foreach collection="list" index="index" item="item">
+					when id = #{item.id,jdbcType=BIGINT} then #{item.version,jdbcType=BIGINT}
+				</foreach>
+			</trim>
+			<trim prefix="deleted = case" suffix="end,">
+				<foreach collection="list" index="index" item="item">
+					when id = #{item.id,jdbcType=BIGINT} then #{item.deleted,jdbcType=TINYINT}
+				</foreach>
+			</trim>
+		</trim>
+		where id in
+		<foreach close=")" collection="list" item="item" open="(" separator=", ">
+			#{item.id,jdbcType=BIGINT}
+		</foreach>
+	</update>
+	<update id="updateBatchSelective" parameterType="java.util.List">
+		<!--@mbg.generated-->
+		update manager_department
+		<trim prefix="set" suffixOverrides=",">
+			<trim prefix="pid = case" suffix="end,">
+				<foreach collection="list" index="index" item="item">
+					<if test="item.pid != null">
+						when id = #{item.id,jdbcType=BIGINT} then #{item.pid,jdbcType=BIGINT}
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="`name` = case" suffix="end,">
+				<foreach collection="list" index="index" item="item">
+					<if test="item.name != null">
+						when id = #{item.id,jdbcType=BIGINT} then #{item.name,jdbcType=VARCHAR}
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="create_time = case" suffix="end,">
+				<foreach collection="list" index="index" item="item">
+					<if test="item.createTime != null">
+						when id = #{item.id,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="create_user = case" suffix="end,">
+				<foreach collection="list" index="index" item="item">
+					<if test="item.createUser != null">
+						when id = #{item.id,jdbcType=BIGINT} then #{item.createUser,jdbcType=BIGINT}
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="update_time = case" suffix="end,">
+				<foreach collection="list" index="index" item="item">
+					<if test="item.updateTime != null">
+						when id = #{item.id,jdbcType=BIGINT} then #{item.updateTime,jdbcType=TIMESTAMP}
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="update_user = case" suffix="end,">
+				<foreach collection="list" index="index" item="item">
+					<if test="item.updateUser != null">
+						when id = #{item.id,jdbcType=BIGINT} then #{item.updateUser,jdbcType=BIGINT}
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="version = case" suffix="end,">
+				<foreach collection="list" index="index" item="item">
+					<if test="item.version != null">
+						when id = #{item.id,jdbcType=BIGINT} then #{item.version,jdbcType=BIGINT}
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="deleted = case" suffix="end,">
+				<foreach collection="list" index="index" item="item">
+					<if test="item.deleted != null">
+						when id = #{item.id,jdbcType=BIGINT} then #{item.deleted,jdbcType=TINYINT}
+					</if>
+				</foreach>
+			</trim>
+		</trim>
+		where id in
+		<foreach close=")" collection="list" item="item" open="(" separator=", ">
+			#{item.id,jdbcType=BIGINT}
+		</foreach>
+	</update>
+	<insert id="batchInsert" parameterType="map">
+		<!--@mbg.generated-->
+		insert into manager_department
+		(id, pid, `name`, create_time, create_user, update_time, update_user, version, deleted
+		)
+		values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.id,jdbcType=BIGINT}, #{item.pid,jdbcType=BIGINT}, #{item.name,jdbcType=VARCHAR},
+			#{item.createTime,jdbcType=TIMESTAMP}, #{item.createUser,jdbcType=BIGINT},
+			#{item.updateTime,jdbcType=TIMESTAMP},
+			#{item.updateUser,jdbcType=BIGINT}, #{item.version,jdbcType=BIGINT}, #{item.deleted,jdbcType=TINYINT}
+			)
+		</foreach>
+	</insert>
+	<insert id="insertOrUpdate" parameterType="com.github.quick.spring.boot.manage.dao.entity.ManagerDepartment">
+		<!--@mbg.generated-->
+		insert into manager_department
+		(id, pid, `name`, create_time, create_user, update_time, update_user, version, deleted
+		)
+		values
+		(#{id,jdbcType=BIGINT}, #{pid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+		#{createUser,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT},
+		#{version,jdbcType=BIGINT}, #{deleted,jdbcType=TINYINT})
+		on duplicate key update
+		id = #{id,jdbcType=BIGINT},
+		pid = #{pid,jdbcType=BIGINT},
+		`name` = #{name,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		create_user = #{createUser,jdbcType=BIGINT},
+		update_time = #{updateTime,jdbcType=TIMESTAMP},
+		update_user = #{updateUser,jdbcType=BIGINT},
+		version = #{version,jdbcType=BIGINT},
+		deleted = #{deleted,jdbcType=TINYINT}
+	</insert>
+	<insert id="insertOrUpdateSelective"
+			parameterType="com.github.quick.spring.boot.manage.dao.entity.ManagerDepartment">
+		<!--@mbg.generated-->
+		insert into manager_department
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="pid != null">
+				pid,
+			</if>
+			<if test="name != null">
+				`name`,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="createUser != null">
+				create_user,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="updateUser != null">
+				update_user,
+			</if>
+			<if test="version != null">
+				version,
+			</if>
+			<if test="deleted != null">
+				deleted,
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="pid != null">
+				#{pid,jdbcType=BIGINT},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createUser != null">
+				#{createUser,jdbcType=BIGINT},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateUser != null">
+				#{updateUser,jdbcType=BIGINT},
+			</if>
+			<if test="version != null">
+				#{version,jdbcType=BIGINT},
+			</if>
+			<if test="deleted != null">
+				#{deleted,jdbcType=TINYINT},
+			</if>
+		</trim>
+		on duplicate key update
+		<trim suffixOverrides=",">
+			<if test="id != null">
+				id = #{id,jdbcType=BIGINT},
+			</if>
+			<if test="pid != null">
+				pid = #{pid,jdbcType=BIGINT},
+			</if>
+			<if test="name != null">
+				`name` = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createUser != null">
+				create_user = #{createUser,jdbcType=BIGINT},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateUser != null">
+				update_user = #{updateUser,jdbcType=BIGINT},
+			</if>
+			<if test="version != null">
+				version = #{version,jdbcType=BIGINT},
+			</if>
+			<if test="deleted != null">
+				deleted = #{deleted,jdbcType=TINYINT},
+			</if>
+		</trim>
+	</insert>
 </mapper>
