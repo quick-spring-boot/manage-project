@@ -8,13 +8,13 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface ManagerPermissionMapper extends BaseMapper<ManagerPermission> {
-    int updateBatch(List<ManagerPermission> list);
+	int updateBatch(List<ManagerPermission> list);
 
-    int updateBatchSelective(List<ManagerPermission> list);
+	int updateBatchSelective(List<ManagerPermission> list);
 
-    int batchInsert(@Param("list") List<ManagerPermission> list);
+	int batchInsert(@Param("list") List<ManagerPermission> list);
 
-    int insertOrUpdate(ManagerPermission record);
+	int insertOrUpdate(ManagerPermission record);
 
-    int insertOrUpdateSelective(ManagerPermission record);
+	int insertOrUpdateSelective(ManagerPermission record);
 }

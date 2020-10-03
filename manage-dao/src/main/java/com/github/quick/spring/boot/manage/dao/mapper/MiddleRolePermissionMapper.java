@@ -8,13 +8,13 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface MiddleRolePermissionMapper extends BaseMapper<MiddleRolePermission> {
-    int updateBatch(List<MiddleRolePermission> list);
+	int updateBatch(List<MiddleRolePermission> list);
 
-    int updateBatchSelective(List<MiddleRolePermission> list);
+	int updateBatchSelective(List<MiddleRolePermission> list);
 
-    int batchInsert(@Param("list") List<MiddleRolePermission> list);
+	int batchInsert(@Param("list") List<MiddleRolePermission> list);
 
-    int insertOrUpdate(MiddleRolePermission record);
+	int insertOrUpdate(MiddleRolePermission record);
 
-    int insertOrUpdateSelective(MiddleRolePermission record);
+	int insertOrUpdateSelective(MiddleRolePermission record);
 }

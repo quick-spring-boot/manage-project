@@ -8,13 +8,13 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface MiddleUserDepartmentMapper extends BaseMapper<MiddleUserDepartment> {
-    int updateBatch(List<MiddleUserDepartment> list);
+	int updateBatch(List<MiddleUserDepartment> list);
 
-    int updateBatchSelective(List<MiddleUserDepartment> list);
+	int updateBatchSelective(List<MiddleUserDepartment> list);
 
-    int batchInsert(@Param("list") List<MiddleUserDepartment> list);
+	int batchInsert(@Param("list") List<MiddleUserDepartment> list);
 
-    int insertOrUpdate(MiddleUserDepartment record);
+	int insertOrUpdate(MiddleUserDepartment record);
 
-    int insertOrUpdateSelective(MiddleUserDepartment record);
+	int insertOrUpdateSelective(MiddleUserDepartment record);
 }

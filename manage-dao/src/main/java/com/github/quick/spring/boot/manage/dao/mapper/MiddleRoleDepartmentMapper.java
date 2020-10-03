@@ -8,13 +8,13 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface MiddleRoleDepartmentMapper extends BaseMapper<MiddleRoleDepartment> {
-    int updateBatch(List<MiddleRoleDepartment> list);
+	int updateBatch(List<MiddleRoleDepartment> list);
 
-    int updateBatchSelective(List<MiddleRoleDepartment> list);
+	int updateBatchSelective(List<MiddleRoleDepartment> list);
 
-    int batchInsert(@Param("list") List<MiddleRoleDepartment> list);
+	int batchInsert(@Param("list") List<MiddleRoleDepartment> list);
 
-    int insertOrUpdate(MiddleRoleDepartment record);
+	int insertOrUpdate(MiddleRoleDepartment record);
 
-    int insertOrUpdateSelective(MiddleRoleDepartment record);
+	int insertOrUpdateSelective(MiddleRoleDepartment record);
 }

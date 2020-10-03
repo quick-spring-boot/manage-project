@@ -8,13 +8,13 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface ManagerUserMapper extends BaseMapper<ManagerUser> {
-    int updateBatch(List<ManagerUser> list);
+	int updateBatch(List<ManagerUser> list);
 
-    int updateBatchSelective(List<ManagerUser> list);
+	int updateBatchSelective(List<ManagerUser> list);
 
-    int batchInsert(@Param("list") List<ManagerUser> list);
+	int batchInsert(@Param("list") List<ManagerUser> list);
 
-    int insertOrUpdate(ManagerUser record);
+	int insertOrUpdate(ManagerUser record);
 
-    int insertOrUpdateSelective(ManagerUser record);
+	int insertOrUpdateSelective(ManagerUser record);
 }

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.github.quick.spring.boot.manage.dao.mapper.ManagerPermissionMapper">
-  <resultMap id="BaseResultMap" type="com.github.quick.spring.boot.manage.dao.entity.ManagerPermission">
+<mapper namespace="com.github.quick.spring.boot.manage.dao.mapper.ManagerMenuMapper">
+  <resultMap id="BaseResultMap" type="com.github.quick.spring.boot.manage.dao.entity.ManagerMenu">
     <!--@mbg.generated-->
-    <!--@Table manager_permission-->
+    <!--@Table manager_menu-->
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="type" jdbcType="TINYINT" property="type" />
-    <result column="ref_id" jdbcType="BIGINT" property="refId" />
+    <result column="pid" jdbcType="BIGINT" property="pid" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="create_user" jdbcType="BIGINT" property="createUser" />
@@ -17,21 +18,26 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, `type`, ref_id, `status`, create_time, create_user, update_time, update_user, 
+    id, pid, `path`, `name`, `status`, create_time, create_user, update_time, update_user, 
     version, deleted
   </sql>
   <update id="updateBatch" parameterType="java.util.List">
     <!--@mbg.generated-->
-    update manager_permission
+    update manager_menu
     <trim prefix="set" suffixOverrides=",">
-      <trim prefix="`type` = case" suffix="end,">
+      <trim prefix="pid = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.type,jdbcType=TINYINT}
+          when id = #{item.id,jdbcType=BIGINT} then #{item.pid,jdbcType=BIGINT}
         </foreach>
       </trim>
-      <trim prefix="ref_id = case" suffix="end,">
+      <trim prefix="`path` = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.refId,jdbcType=BIGINT}
+          when id = #{item.id,jdbcType=BIGINT} then #{item.path,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="`name` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.name,jdbcType=VARCHAR}
         </foreach>
       </trim>
       <trim prefix="`status` = case" suffix="end,">
@@ -77,19 +83,26 @@
   </update>
   <update id="updateBatchSelective" parameterType="java.util.List">
     <!--@mbg.generated-->
-    update manager_permission
+    update manager_menu
     <trim prefix="set" suffixOverrides=",">
-      <trim prefix="`type` = case" suffix="end,">
+      <trim prefix="pid = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          <if test="item.type != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.type,jdbcType=TINYINT}
+          <if test="item.pid != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.pid,jdbcType=BIGINT}
           </if>
         </foreach>
       </trim>
-      <trim prefix="ref_id = case" suffix="end,">
+      <trim prefix="`path` = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          <if test="item.refId != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.refId,jdbcType=BIGINT}
+          <if test="item.path != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.path,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="`name` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.name != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.name,jdbcType=VARCHAR}
           </if>
         </foreach>
       </trim>
@@ -150,31 +163,32 @@
   </update>
   <insert id="batchInsert" parameterType="map">
     <!--@mbg.generated-->
-    insert into manager_permission
-    (id, `type`, ref_id, `status`, create_time, create_user, update_time, update_user, 
+    insert into manager_menu
+    (id, pid, `path`, `name`, `status`, create_time, create_user, update_time, update_user, 
       version, deleted)
     values
     <foreach collection="list" item="item" separator=",">
-      (#{item.id,jdbcType=BIGINT}, #{item.type,jdbcType=TINYINT}, #{item.refId,jdbcType=BIGINT}, 
-        #{item.status,jdbcType=TINYINT}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.createUser,jdbcType=BIGINT}, 
-        #{item.updateTime,jdbcType=TIMESTAMP}, #{item.updateUser,jdbcType=BIGINT}, #{item.version,jdbcType=BIGINT}, 
-        #{item.deleted,jdbcType=TINYINT})
+      (#{item.id,jdbcType=BIGINT}, #{item.pid,jdbcType=BIGINT}, #{item.path,jdbcType=VARCHAR}, 
+        #{item.name,jdbcType=VARCHAR}, #{item.status,jdbcType=TINYINT}, #{item.createTime,jdbcType=TIMESTAMP}, 
+        #{item.createUser,jdbcType=BIGINT}, #{item.updateTime,jdbcType=TIMESTAMP}, #{item.updateUser,jdbcType=BIGINT}, 
+        #{item.version,jdbcType=BIGINT}, #{item.deleted,jdbcType=TINYINT})
     </foreach>
   </insert>
-  <insert id="insertOrUpdate" parameterType="com.github.quick.spring.boot.manage.dao.entity.ManagerPermission">
+  <insert id="insertOrUpdate" parameterType="com.github.quick.spring.boot.manage.dao.entity.ManagerMenu">
     <!--@mbg.generated-->
-    insert into manager_permission
-    (id, `type`, ref_id, `status`, create_time, create_user, update_time, update_user, 
+    insert into manager_menu
+    (id, pid, `path`, `name`, `status`, create_time, create_user, update_time, update_user, 
       version, deleted)
     values
-    (#{id,jdbcType=BIGINT}, #{type,jdbcType=TINYINT}, #{refId,jdbcType=BIGINT}, #{status,jdbcType=TINYINT}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{updateUser,jdbcType=BIGINT}, #{version,jdbcType=BIGINT}, #{deleted,jdbcType=TINYINT}
-      )
+    (#{id,jdbcType=BIGINT}, #{pid,jdbcType=BIGINT}, #{path,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}, #{version,jdbcType=BIGINT}, 
+      #{deleted,jdbcType=TINYINT})
     on duplicate key update 
     id = #{id,jdbcType=BIGINT}, 
-    `type` = #{type,jdbcType=TINYINT}, 
-    ref_id = #{refId,jdbcType=BIGINT}, 
+    pid = #{pid,jdbcType=BIGINT}, 
+    `path` = #{path,jdbcType=VARCHAR}, 
+    `name` = #{name,jdbcType=VARCHAR}, 
     `status` = #{status,jdbcType=TINYINT}, 
     create_time = #{createTime,jdbcType=TIMESTAMP}, 
     create_user = #{createUser,jdbcType=BIGINT}, 
@@ -183,18 +197,21 @@
     version = #{version,jdbcType=BIGINT}, 
     deleted = #{deleted,jdbcType=TINYINT}
   </insert>
-  <insert id="insertOrUpdateSelective" parameterType="com.github.quick.spring.boot.manage.dao.entity.ManagerPermission">
+  <insert id="insertOrUpdateSelective" parameterType="com.github.quick.spring.boot.manage.dao.entity.ManagerMenu">
     <!--@mbg.generated-->
-    insert into manager_permission
+    insert into manager_menu
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="type != null">
-        `type`,
+      <if test="pid != null">
+        pid,
       </if>
-      <if test="refId != null">
-        ref_id,
+      <if test="path != null">
+        `path`,
+      </if>
+      <if test="name != null">
+        `name`,
       </if>
       <if test="status != null">
         `status`,
@@ -223,11 +240,14 @@
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="type != null">
-        #{type,jdbcType=TINYINT},
+      <if test="pid != null">
+        #{pid,jdbcType=BIGINT},
       </if>
-      <if test="refId != null">
-        #{refId,jdbcType=BIGINT},
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         #{status,jdbcType=TINYINT},
@@ -256,11 +276,14 @@
       <if test="id != null">
         id = #{id,jdbcType=BIGINT},
       </if>
-      <if test="type != null">
-        `type` = #{type,jdbcType=TINYINT},
+      <if test="pid != null">
+        pid = #{pid,jdbcType=BIGINT},
       </if>
-      <if test="refId != null">
-        ref_id = #{refId,jdbcType=BIGINT},
+      <if test="path != null">
+        `path` = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         `status` = #{status,jdbcType=TINYINT},
