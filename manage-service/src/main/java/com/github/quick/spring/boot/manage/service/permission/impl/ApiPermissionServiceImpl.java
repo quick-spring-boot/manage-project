@@ -39,7 +39,7 @@ public class ApiPermissionServiceImpl implements ApiPermissionService {
 		ManagerApi convert = paramConvert.convert(fullPermission, ManagerApi.class);
 		int insert = managerApiMapper.insert(convert);
 
-		if ( insert> 0) {
+		if (insert > 0) {
 			return convert;
 		}
 		return null;

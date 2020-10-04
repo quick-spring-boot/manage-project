@@ -70,7 +70,7 @@ public class ManagerApi implements Serializable {
 	/**
 	 * 创建时间
 	 */
-	@TableField(value = "create_time",fill = FieldFill.INSERT)
+	@TableField(value = "create_time", fill = FieldFill.INSERT)
 	@ApiModelProperty(value = "创建时间")
 	private Date createTime;
 
@@ -84,14 +84,14 @@ public class ManagerApi implements Serializable {
 	/**
 	 * 更新时间
 	 */
-	@TableField(value = "update_time",fill = FieldFill.INSERT_UPDATE)
+	@TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
 	@ApiModelProperty(value = "更新时间")
 	private Date updateTime;
 
 	/**
 	 * 更新人
 	 */
-	@TableField(value = "update_user" )
+	@TableField(value = "update_user")
 	@ApiModelProperty(value = "更新人")
 	private Long updateUser;
 

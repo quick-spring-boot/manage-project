@@ -32,7 +32,7 @@ public class ManagerUserCreateParamConvert implements Convert<ManagerUserCreateP
 	public ManagerUser convert(ManagerUserCreateParam managerUserCreateParam) {
 
 		if (log.isInfoEnabled()) {
-		    log.info("convert,managerUserCreateParam = {}", managerUserCreateParam);
+			log.info("convert,managerUserCreateParam = {}", managerUserCreateParam);
 		}
 		ManagerUser managerUser = new ManagerUser();
 		managerUser.setUsername(managerUserCreateParam.getUsername());
