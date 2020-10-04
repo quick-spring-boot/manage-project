@@ -19,10 +19,13 @@ package com.github.quick.spring.boot.manage.dao.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.Version;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -32,7 +35,7 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(value = "com-github-quick-spring-boot-manage-dao-entity-ManagerButton")
 @TableName(value = "manager_button")
 public class ManagerButton implements Serializable {
-	@TableId(value = "id", type = IdType.INPUT)
+	@TableId(value = "id", type = IdType.AUTO)
 	@ApiModelProperty(value = "")
 	private Long id;
 
@@ -60,7 +63,7 @@ public class ManagerButton implements Serializable {
 	/**
 	 * 创建时间
 	 */
-	@TableField(value = "create_time")
+	@TableField(value = "create_time",fill = FieldFill.INSERT)
 	@ApiModelProperty(value = "创建时间")
 	private Date createTime;
 
@@ -74,7 +77,7 @@ public class ManagerButton implements Serializable {
 	/**
 	 * 更新时间
 	 */
-	@TableField(value = "update_time")
+	@TableField(value = "update_time" , fill = FieldFill.INSERT_UPDATE)
 	@ApiModelProperty(value = "更新时间")
 	private Date updateTime;
 
@@ -90,11 +93,13 @@ public class ManagerButton implements Serializable {
 	 */
 	@TableField(value = "version")
 	@ApiModelProperty(value = "乐观锁")
+	@Version
 	private Long version;
 
 	/**
 	 * 删除标记
 	 */
+	@TableLogic
 	@TableField(value = "deleted")
 	@ApiModelProperty(value = "删除标记")
 	private Byte deleted;

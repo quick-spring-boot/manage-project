@@ -1,35 +1,19 @@
-/*
- * Copyright 2020-present quick-spring-boot All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.github.quick.spring.boot.manage.dao.entity;
 
-import java.io.Serializable;
-import java.util.Date;
-
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
+import java.util.Date;
 
 @ApiModel(value = "com-github-quick-spring-boot-manage-dao-entity-ManagerMenu")
 @TableName(value = "manager_menu")
 public class ManagerMenu implements Serializable {
-	@TableId(value = "id", type = IdType.INPUT)
+	@TableId(value = "id", type = IdType.AUTO)
 	@ApiModelProperty(value = "")
 	private Long id;
 
@@ -55,6 +39,13 @@ public class ManagerMenu implements Serializable {
 	private String name;
 
 	/**
+	 * 编码
+	 */
+	@TableField(value = "code")
+	@ApiModelProperty(value = "编码")
+	private String code;
+
+	/**
 	 * 0无效，1有效
 	 */
 	@TableField(value = "`status`")
@@ -64,7 +55,7 @@ public class ManagerMenu implements Serializable {
 	/**
 	 * 创建时间
 	 */
-	@TableField(value = "create_time")
+	@TableField(value = "create_time",fill = FieldFill.INSERT)
 	@ApiModelProperty(value = "创建时间")
 	private Date createTime;
 
@@ -78,7 +69,7 @@ public class ManagerMenu implements Serializable {
 	/**
 	 * 更新时间
 	 */
-	@TableField(value = "update_time")
+	@TableField(value = "update_time" , fill = FieldFill.INSERT_UPDATE)
 	@ApiModelProperty(value = "更新时间")
 	private Date updateTime;
 
@@ -112,6 +103,8 @@ public class ManagerMenu implements Serializable {
 	public static final String COL_PATH = "path";
 
 	public static final String COL_NAME = "name";
+
+	public static final String COL_CODE = "code";
 
 	public static final String COL_STATUS = "status";
 
@@ -193,6 +186,24 @@ public class ManagerMenu implements Serializable {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * 获取编码
+	 *
+	 * @return code - 编码
+	 */
+	public String getCode() {
+		return code;
+	}
+
+	/**
+	 * 设置编码
+	 *
+	 * @param code 编码
+	 */
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	/**
@@ -337,6 +348,7 @@ public class ManagerMenu implements Serializable {
 				&& (this.getPid() == null ? other.getPid() == null : this.getPid().equals(other.getPid()))
 				&& (this.getPath() == null ? other.getPath() == null : this.getPath().equals(other.getPath()))
 				&& (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+				&& (this.getCode() == null ? other.getCode() == null : this.getCode().equals(other.getCode()))
 				&& (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
 				&& (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
 				&& (this.getCreateUser() == null ? other.getCreateUser() == null : this.getCreateUser().equals(other.getCreateUser()))
@@ -354,6 +366,7 @@ public class ManagerMenu implements Serializable {
 		result = prime * result + ((getPid() == null) ? 0 : getPid().hashCode());
 		result = prime * result + ((getPath() == null) ? 0 : getPath().hashCode());
 		result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
+		result = prime * result + ((getCode() == null) ? 0 : getCode().hashCode());
 		result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
 		result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
 		result = prime * result + ((getCreateUser() == null) ? 0 : getCreateUser().hashCode());

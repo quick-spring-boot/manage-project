@@ -305,4 +305,11 @@
 			</if>
 		</trim>
 	</insert>
+
+	<select id="queryByUsername" resultMap="BaseResultMap">
+		select * from manager_user where
+		<if test="username != null and username != ''">
+			username = #{username,jdbcType=VARCHAR}
+		</if>
+	</select>
 </mapper>

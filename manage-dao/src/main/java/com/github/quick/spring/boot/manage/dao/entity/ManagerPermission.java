@@ -1,30 +1,17 @@
-/*
- * Copyright 2020-present quick-spring-boot All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.github.quick.spring.boot.manage.dao.entity;
 
-import java.io.Serializable;
-import java.util.Date;
-
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.Version;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 权限表
@@ -36,7 +23,31 @@ public class ManagerPermission implements Serializable {
 
 	public static final String COL_VAL = "val";
 
-	@TableId(value = "id", type = IdType.INPUT)
+	public static final String COL_ID = "id";
+
+	public static final String COL_TYPE = "type";
+
+	public static final String COL_REF_ID = "ref_id";
+
+	public static final String COL_STATUS = "status";
+
+	public static final String COL_CREATE_TIME = "create_time";
+
+	public static final String COL_CREATE_USER = "create_user";
+
+	public static final String COL_UPDATE_TIME = "update_time";
+
+	public static final String COL_UPDATE_USER = "update_user";
+
+	public static final String COL_VERSION = "version";
+
+	public static final String COL_DELETED = "deleted";
+
+	public static final String COL_REF_TABLE = "ref_table";
+
+	private static final long serialVersionUID = 1L;
+
+	@TableId(value = "id", type = IdType.AUTO)
 	@ApiModelProperty(value = "")
 	private Long id;
 
@@ -64,7 +75,7 @@ public class ManagerPermission implements Serializable {
 	/**
 	 * 创建时间
 	 */
-	@TableField(value = "create_time")
+	@TableField(value = "create_time", fill = FieldFill.INSERT)
 	@ApiModelProperty(value = "创建时间")
 	private Date createTime;
 
@@ -78,7 +89,7 @@ public class ManagerPermission implements Serializable {
 	/**
 	 * 更新时间
 	 */
-	@TableField(value = "update_time")
+	@TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
 	@ApiModelProperty(value = "更新时间")
 	private Date updateTime;
 
@@ -92,6 +103,7 @@ public class ManagerPermission implements Serializable {
 	/**
 	 * 乐观锁
 	 */
+	@Version
 	@TableField(value = "version")
 	@ApiModelProperty(value = "乐观锁")
 	private Long version;
@@ -99,31 +111,17 @@ public class ManagerPermission implements Serializable {
 	/**
 	 * 删除标记
 	 */
+	@TableLogic
 	@TableField(value = "deleted")
 	@ApiModelProperty(value = "删除标记")
 	private Byte deleted;
 
-	private static final long serialVersionUID = 1L;
-
-	public static final String COL_ID = "id";
-
-	public static final String COL_TYPE = "type";
-
-	public static final String COL_REF_ID = "ref_id";
-
-	public static final String COL_STATUS = "status";
-
-	public static final String COL_CREATE_TIME = "create_time";
-
-	public static final String COL_CREATE_USER = "create_user";
-
-	public static final String COL_UPDATE_TIME = "update_time";
-
-	public static final String COL_UPDATE_USER = "update_user";
-
-	public static final String COL_VERSION = "version";
-
-	public static final String COL_DELETED = "deleted";
+	/**
+	 * 外联表
+	 */
+	@TableField(value = "ref_table")
+	@ApiModelProperty(value = "外联表")
+	private String refTable;
 
 	/**
 	 * @return id
@@ -301,6 +299,24 @@ public class ManagerPermission implements Serializable {
 		this.deleted = deleted;
 	}
 
+	/**
+	 * 获取外联表
+	 *
+	 * @return ref_table - 外联表
+	 */
+	public String getRefTable() {
+		return refTable;
+	}
+
+	/**
+	 * 设置外联表
+	 *
+	 * @param refTable 外联表
+	 */
+	public void setRefTable(String refTable) {
+		this.refTable = refTable;
+	}
+
 	@Override
 	public boolean equals(Object that) {
 		if (this == that) {
@@ -322,7 +338,8 @@ public class ManagerPermission implements Serializable {
 				&& (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
 				&& (this.getUpdateUser() == null ? other.getUpdateUser() == null : this.getUpdateUser().equals(other.getUpdateUser()))
 				&& (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
-				&& (this.getDeleted() == null ? other.getDeleted() == null : this.getDeleted().equals(other.getDeleted()));
+				&& (this.getDeleted() == null ? other.getDeleted() == null : this.getDeleted().equals(other.getDeleted()))
+				&& (this.getRefTable() == null ? other.getRefTable() == null : this.getRefTable().equals(other.getRefTable()));
 	}
 
 	@Override
@@ -339,6 +356,7 @@ public class ManagerPermission implements Serializable {
 		result = prime * result + ((getUpdateUser() == null) ? 0 : getUpdateUser().hashCode());
 		result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
 		result = prime * result + ((getDeleted() == null) ? 0 : getDeleted().hashCode());
+		result = prime * result + ((getRefTable() == null) ? 0 : getRefTable().hashCode());
 		return result;
 	}
 }

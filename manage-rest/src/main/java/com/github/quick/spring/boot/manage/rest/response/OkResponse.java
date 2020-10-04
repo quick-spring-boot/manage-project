@@ -21,6 +21,7 @@ import com.github.quick.spring.boot.manage.model.vo.ResultVo;
 public enum OkResponse {
 	SAVE_SUCCESS(200, "保存成功"),
 	UPDATE_SUCCESS(200, "更新成功"),
+	QUERY_SUCCESS(200, "更新成功"),
 	HEALTHY_SUCCESS(200, "健康"),
 	;
 

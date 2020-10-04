@@ -31,7 +31,7 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(value = "com-github-quick-spring-boot-manage-dao-entity-MiddleRoleDepartment")
 @TableName(value = "middle_role_department")
 public class MiddleRoleDepartment implements Serializable {
-	@TableId(value = "id", type = IdType.INPUT)
+	@TableId(value = "id", type = IdType.AUTO)
 	@ApiModelProperty(value = "")
 	private Long id;
 

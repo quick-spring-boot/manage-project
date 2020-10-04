@@ -35,7 +35,7 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(value = "com-github-quick-spring-boot-manage-dao-entity-ManagerApi")
 @TableName(value = "manager_api")
 public class ManagerApi implements Serializable {
-	@TableId(value = "id", type = IdType.INPUT)
+	@TableId(value = "id", type = IdType.AUTO)
 	@ApiModelProperty(value = "")
 	private Long id;
 
