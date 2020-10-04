@@ -7,6 +7,11 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
+
+
+  mapper-locations: classpath:mapper/*Mapper.xml
+
+
 spring:
   application:
     name: manage-user-rest
@@ -32,6 +37,17 @@ spring:
     maxPoolPreparedStatementPerConnectionSize: 20
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+  redis:
+    database: 1
+    host: 47.98.225.144
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: -1
+        min-idle: 0
+    port: 6379
+    timeout: 200
 
 
 server:

@@ -31,10 +31,38 @@ public class GsonUtils {
 	private GsonUtils() {
 	}
 
+
+	public static GsonBuilder gsonBuildBuild() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setDateFormat(DateConstant.LONG_DATE_FORMAT);
+		gsonBuilder.serializeNulls();
+
+
+		gsonBuilder.registerTypeAdapter(LocalDateTime.class, (JsonSerializer<LocalDateTime>) (src, typeOfSrc, context) ->
+				new JsonPrimitive(src.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))));
+		gsonBuilder.registerTypeAdapter(LocalDate.class, (JsonSerializer<LocalDate>) (src, typeOfSrc, context) ->
+				new JsonPrimitive(src.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+
+
+		gsonBuilder.registerTypeAdapter(LocalDateTime.class, (JsonDeserializer<LocalDateTime>) (json, type, jsonDeserializationContext) -> {
+			String datetime = json.getAsJsonPrimitive().getAsString();
+			return LocalDateTime.parse(datetime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+		});
+		gsonBuilder.registerTypeAdapter(LocalDate.class, (JsonDeserializer<LocalDate>) (json, type, jsonDeserializationContext) -> {
+			String datetime = json.getAsJsonPrimitive().getAsString();
+			return LocalDate.parse(datetime, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		}).create();
+
+
+		return gsonBuilder;
+	}
+
 	public static Gson gsonBuild() {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setDateFormat(DateConstant.LONG_DATE_FORMAT);
 		gsonBuilder.serializeNulls();
+
+
 		gsonBuilder.registerTypeAdapter(LocalDateTime.class, (JsonSerializer<LocalDateTime>) (src, typeOfSrc, context) ->
 				new JsonPrimitive(src.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))));
 		gsonBuilder.registerTypeAdapter(LocalDate.class, (JsonSerializer<LocalDate>) (src, typeOfSrc, context) ->

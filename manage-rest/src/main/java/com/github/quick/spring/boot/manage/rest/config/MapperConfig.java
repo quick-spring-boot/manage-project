@@ -30,12 +30,4 @@ import org.springframework.context.annotation.Configuration;
 @MapperScan("com.github.quick.spring.boot.manage.dao.mapper")
 public class MapperConfig {
 
-	/**
-	 * mybatis-plus 乐观锁
-	 * @return OptimisticLockerInterceptor
-	 */
-	@Bean
-	public OptimisticLockerInterceptor optimisticLockerInterceptor() {
-		return new OptimisticLockerInterceptor();
-	}
 }

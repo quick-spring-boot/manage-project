@@ -19,8 +19,8 @@ package com.github.quick.spring.boot.manage.rest.response;
 import com.github.quick.spring.boot.manage.model.vo.ResultVo;
 
 public enum ErrorResponse {
-	SAVE_FAIL(200, "保存失败"),
-	UPDATE_FAIL(200, "更新失败"),
+	SAVE_FAIL(500, "保存失败"),
+	UPDATE_FAIL(500, "更新失败"),
 	;
 
 	private final int code;

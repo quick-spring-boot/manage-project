@@ -16,10 +16,17 @@
 
 package com.github.quick.spring.boot.manage.rest.config;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
 
 import com.github.quick.spring.boot.manage.common.serializer.GsonUtils;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+import springfox.documentation.spring.web.json.Json;
 
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.context.annotation.Bean;
@@ -34,8 +41,27 @@ public class GsonConfig {
 
 		Collection<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
 		GsonHttpMessageConverter gsonHttpMessageConverter = new GsonHttpMessageConverter();
-		gsonHttpMessageConverter.setGson(GsonUtils.gsonBuild());
+		GsonBuilder gsonBuilder = GsonUtils.gsonBuildBuild();
+		gsonBuilder.registerTypeAdapter(Json.class, new SpringfoxJsonToGsonAdapter());
+
+		gsonHttpMessageConverter.setGson(gsonBuilder.create());
 		messageConverters.add(gsonHttpMessageConverter);
 		return new HttpMessageConverters(true, messageConverters);
 	}
+
+	/**
+	 * 针对 swagger 问题的处理.
+	 * Unable to render this definition The provided definition does not specify a valid version field.
+	 * Please indicate a valid Swagger or OpenAPI version field. Supported version fields are swagger: “2.0” and those that match openapi: 3.0.n (for example, openapi: 3.0.0).
+	 *
+	 * <a href="https://blog.csdn.net/deaidai/article/details/105896545}">参考</a>
+	 */
+	private static class SpringfoxJsonToGsonAdapter implements JsonSerializer<Json> {
+		@Override
+		public JsonElement serialize(Json json, Type type, JsonSerializationContext context) {
+			final JsonParser parser = new JsonParser();
+			return parser.parse(json.value());
+		}
+	}
+
 }
