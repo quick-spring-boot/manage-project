@@ -27,13 +27,17 @@ import com.github.quick.spring.boot.manage.dao.mapper.ManagerUserMapper;
 import com.github.quick.spring.boot.manage.model.req.page.PageParam;
 import com.github.quick.spring.boot.manage.model.req.user.ManagerUserCreateParam;
 import com.github.quick.spring.boot.manage.model.res.ManagerUserResponse;
+import com.github.quick.spring.boot.manage.model.res.TokenCollection;
 import com.github.quick.spring.boot.manage.service.factory.convert.ParamConvert;
 import com.github.quick.spring.boot.manage.service.user.ManagerUserBizService;
+import com.github.quick.spring.boot.manage.service.user.token.TokenService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 @Service("managerUserBizServiceImpl")
 public class ManagerUserBizServiceImpl implements ManagerUserBizService {
@@ -44,13 +48,16 @@ public class ManagerUserBizServiceImpl implements ManagerUserBizService {
 
 	private final ManagerUserMapper managerUserMapper;
 
+	private final TokenService tokenService;
+
+
 	public ManagerUserBizServiceImpl(
 			ManagerUserMapper managerUserMapper,
-			@Qualifier("paramConvertImpl") ParamConvert paramConvert) {
+			@Qualifier("paramConvertImpl") ParamConvert paramConvert, @Qualifier("tokenServiceImpl") TokenService tokenService) {
 		this.managerUserMapper = managerUserMapper;
 		this.paramConvert = paramConvert;
+		this.tokenService = tokenService;
 	}
-
 
 	@Override
 	public boolean createManagerUser(ManagerUserCreateParam param) {
@@ -132,5 +139,29 @@ public class ManagerUserBizServiceImpl implements ManagerUserBizService {
 		}
 
 		return null;
+	}
+
+	@Override
+	public TokenCollection generatorToken(long userId) {
+		return tokenService.generatorToken(userId);
+	}
+
+	@Override
+	public TokenCollection refreshToken(String refreshToken) {
+		return tokenService.refreshToken(refreshToken);
+	}
+
+	@Override
+	public ManagerUserResponse findUserByToken(String accessToken) {
+		boolean expire = this.tokenService.expire(accessToken);
+		if (expire) {
+			throw new ManagerCommonException("token过期");
+		}
+
+		String userId = this.tokenService.getUserId(accessToken);
+		if (StringUtils.isEmpty(userId)) {
+			throw new ManagerCommonException("token 中用户id不存在");
+		}
+		return this.byId(Long.parseLong(userId));
 	}
 }

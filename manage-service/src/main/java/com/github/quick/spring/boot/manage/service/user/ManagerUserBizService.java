@@ -20,6 +20,7 @@ import com.github.quick.spring.boot.manage.dao.entity.ManagerUser;
 import com.github.quick.spring.boot.manage.model.req.page.PageParam;
 import com.github.quick.spring.boot.manage.model.req.user.ManagerUserCreateParam;
 import com.github.quick.spring.boot.manage.model.res.ManagerUserResponse;
+import com.github.quick.spring.boot.manage.model.res.TokenCollection;
 
 /**
  * 管理端用户业务
@@ -37,4 +38,16 @@ public interface ManagerUserBizService {
 	Object query(PageParam pageParam);
 
 	ManagerUserResponse byId(Long userId);
+
+	TokenCollection generatorToken(long userId);
+
+	/**
+	 * 刷新token
+	 * @param refreshToken
+	 * @return
+	 */
+	TokenCollection refreshToken(String refreshToken);
+
+
+	ManagerUserResponse findUserByToken(String accessToken);
 }

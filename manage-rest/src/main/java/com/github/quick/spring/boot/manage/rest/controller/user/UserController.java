@@ -18,6 +18,8 @@ package com.github.quick.spring.boot.manage.rest.controller.user;
 
 import com.github.quick.spring.boot.manage.model.req.page.PageParam;
 import com.github.quick.spring.boot.manage.model.req.user.ManagerUserCreateParam;
+import com.github.quick.spring.boot.manage.model.res.ManagerUserResponse;
+import com.github.quick.spring.boot.manage.model.res.TokenCollection;
 import com.github.quick.spring.boot.manage.model.vo.ResultVo;
 import com.github.quick.spring.boot.manage.rest.response.OkResponse;
 import com.github.quick.spring.boot.manage.service.user.ManagerUserBizService;
@@ -84,4 +86,30 @@ public class UserController {
 		return OkResponse.QUERY_SUCCESS.ret(managerUserBizService.byId(userId));
 	}
 
+
+	@ApiOperation(value = "生成token")
+	@PostMapping("/token/{user_id}")
+	public ResultVo<TokenCollection> generatorToken(
+			@ApiParam(value = "用户id") @PathVariable(value = "user_id") Long userId
+	) {
+		return OkResponse.GENERATOR_TOKEN_SUCCESS.ret(managerUserBizService.generatorToken(userId));
+	}
+
+
+	@ApiOperation(value = "刷新token")
+	@PutMapping("/token/refresh/{refresh_token}")
+	public ResultVo<TokenCollection> generatorToken(
+			@ApiParam(value = "刷新用token") @PathVariable(value = "refresh_token") String refreshToken
+	) {
+		return OkResponse.GENERATOR_TOKEN_SUCCESS.ret(managerUserBizService.refreshToken(refreshToken));
+	}
+
+
+	@ApiOperation(value = "通过token获取用户信息")
+	@GetMapping("/token/{access_token}")
+	public ResultVo<ManagerUserResponse> findUserByToken(
+			@ApiParam(value = "access_token") @PathVariable(value = "access_token") String accessToken
+	) {
+		return OkResponse.QUERY_SUCCESS.ret(managerUserBizService.findUserByToken(accessToken));
+	}
 }
