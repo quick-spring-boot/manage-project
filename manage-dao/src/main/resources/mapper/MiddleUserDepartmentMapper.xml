@@ -134,4 +134,15 @@
 			</if>
 		</trim>
 	</insert>
+
+	<select id="findByUserIdAndDeptId" resultMap="BaseResultMap">
+		select * from middle_user_department
+		where 1=1
+		<if test="deptId != null">
+			and department_id = #{deptId,jdbcType=BIGINT}
+		</if>
+		<if test="userId != null">
+			and user_id = #{userId,jdbcType=BIGINT}
+		</if>
+	</select>
 </mapper>

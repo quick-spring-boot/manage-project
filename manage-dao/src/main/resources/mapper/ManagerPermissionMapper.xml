@@ -339,4 +339,31 @@
 			</if>
 		</trim>
 	</insert>
+
+	<select id="findByButton" resultType="com.github.quick.spring.boot.manage.model.res.PermissionInfoResponse">
+		select mp.id as id , mb.name as name , mb.code as code , mb.id as fkId from manager_permission mp
+		left join manager_button mb
+		on (mp.ref_table = #{tableName,jdbcType=VARCHAR} and mp.ref_id = mb.id)
+		where ref_table = #{tableName,jdbcType=VARCHAR}
+	</select>
+
+	<select id="findByMenu" resultType="com.github.quick.spring.boot.manage.model.res.PermissionInfoResponse">
+		select
+		mp.id as id , mm.name as name , mm.code as code , mm.id as fkId , mm.pid as pid , mm.path as path
+
+		from
+		manager_permission mp
+		left join manager_menu mm
+		on (mp.ref_table = #{tableName,jdbcType=VARCHAR} and mp.ref_id = mm.id)
+		where ref_table = #{tableName,jdbcType=VARCHAR}
+
+	</select>
+
+	<select id="findByApi" resultType="com.github.quick.spring.boot.manage.model.res.PermissionInfoResponse">
+		select mp.id as id , ma.name as name , ma.code as code , ma.id as fkId , ma.val as val from
+		manager_permission mp
+		left join manager_api ma
+		on (mp.ref_table = #{tableName,jdbcType=VARCHAR} and mp.ref_id = ma.id)
+		where ref_table = #{tableName,jdbcType=VARCHAR}
+	</select>
 </mapper>

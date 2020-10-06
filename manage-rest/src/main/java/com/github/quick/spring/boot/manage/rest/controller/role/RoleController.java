@@ -16,16 +16,22 @@
 
 package com.github.quick.spring.boot.manage.rest.controller.role;
 
+import com.github.quick.spring.boot.manage.model.req.page.PageParam;
+import com.github.quick.spring.boot.manage.model.req.role.CreateRoleParam;
+import com.github.quick.spring.boot.manage.model.req.role.QueryRoleParam;
 import com.github.quick.spring.boot.manage.model.vo.ResultVo;
 import com.github.quick.spring.boot.manage.rest.response.OkResponse;
+import com.github.quick.spring.boot.manage.service.role.RoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,31 +40,39 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/role")
 public class RoleController {
 
+	private final RoleService roleService;
+
+	public RoleController(@Qualifier("roleServiceImpl") RoleService roleService) {
+		this.roleService = roleService;
+	}
 
 	@ApiOperation(value = "创建角色")
 	@PostMapping("/")
-	public ResultVo<Boolean> createUser(
-
+	public ResultVo<Boolean> create(
+			@RequestBody CreateRoleParam param
 	) {
-		return OkResponse.SAVE_SUCCESS.ret();
+
+		return OkResponse.SAVE_SUCCESS.ret(roleService.create(param));
 	}
 
 	@ApiOperation(value = "修改角色信息")
 	@PutMapping("/{role_id}")
-	public ResultVo<Boolean> updateUser(
-			@ApiParam(value = "角色id") @PathVariable(value = "role_id") Long roleId
+	public ResultVo<Boolean> update(
+			@ApiParam(value = "角色id") @PathVariable(value = "role_id") Long roleId,
+			@RequestBody CreateRoleParam param
 
 	) {
-		return OkResponse.UPDATE_SUCCESS.ret();
+		return OkResponse.UPDATE_SUCCESS.ret(roleService.update(roleId, param));
 	}
 
 
 	@ApiOperation(value = "查询角色列表")
 	@GetMapping("/query")
 	public ResultVo<Object> query(
-
+			QueryRoleParam param,
+			PageParam pageParam
 	) {
-		return OkResponse.QUERY_SUCCESS.ret();
+		return OkResponse.QUERY_SUCCESS.ret(roleService.query(param,pageParam));
 	}
 
 	@ApiOperation(value = "根据ID查询角色详情")
@@ -66,7 +80,6 @@ public class RoleController {
 	public ResultVo<Object> byId(
 			@ApiParam(value = "角色id") @PathVariable(value = "role_id") Long roleId
 	) {
-
-		return OkResponse.UPDATE_SUCCESS.ret();
+		return OkResponse.QUERY_SUCCESS.ret(roleService.byId(roleId));
 	}
 }

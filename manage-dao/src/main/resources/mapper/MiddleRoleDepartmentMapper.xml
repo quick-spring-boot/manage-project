@@ -134,4 +134,16 @@
 			</if>
 		</trim>
 	</insert>
+
+	<select id="findByRoleAndDeptId" resultMap="BaseResultMap">
+		select * from middle_role_department
+		<where>
+			<if test="deptId != null">
+				department_id = #{deptId,jdbcType=BIGINT}
+			</if>
+			<if test="roleId != null">
+				and role_id = #{roleId,jdbcType=BIGINT}
+			</if>
+		</where>
+	</select>
 </mapper>

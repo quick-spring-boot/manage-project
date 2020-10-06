@@ -134,4 +134,16 @@
 			</if>
 		</trim>
 	</insert>
+
+	<select id="findByRoleAndPermissionId" resultMap="BaseResultMap">
+		select * from middle_role_permission
+		<where>
+			<if test="permissionId != null">
+				permission_id = #{permissionId,jdbcType=BIGINT}
+			</if>
+			<if test="roleId != null">
+				and role_id= #{roleId,jdbcType=BIGINT}
+			</if>
+		</where>
+	</select>
 </mapper>

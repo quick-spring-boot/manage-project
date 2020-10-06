@@ -59,3 +59,10 @@ springfox:
         use-model-v3: false
     swagger-ui:
       base-url: /api-doc
+
+
+pagehelper:
+  helperDialect: mysql
+  params: count=countSql
+  reasonable: true
+  supportMethodsArguments: true

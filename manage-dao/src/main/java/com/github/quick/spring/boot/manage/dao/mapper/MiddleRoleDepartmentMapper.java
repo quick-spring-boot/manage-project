@@ -34,4 +34,6 @@ public interface MiddleRoleDepartmentMapper extends BaseMapper<MiddleRoleDepartm
 	int insertOrUpdate(MiddleRoleDepartment record);
 
 	int insertOrUpdateSelective(MiddleRoleDepartment record);
+
+	MiddleRoleDepartment findByRoleAndDeptId(@Param("roleId") Long roleId, @Param("deptId") Long deptId);
 }

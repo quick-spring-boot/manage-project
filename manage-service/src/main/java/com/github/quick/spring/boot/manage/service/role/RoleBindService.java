@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
-package com.github.quick.spring.boot.manage.service.permission;
+package com.github.quick.spring.boot.manage.service.role;
 
-import com.github.quick.spring.boot.manage.model.req.page.PageParam;
-import com.github.quick.spring.boot.manage.model.req.permission.CreatePermission;
+public interface RoleBindService {
+	Boolean bindDepartment(Long roleId, Long deptId);
 
-public interface ManagerPermissionService {
-	boolean save(CreatePermission createPermission);
+	Boolean unBindDepartment(Long roleId, Long deptId);
 
-	boolean delete(Long permissionId);
+	Boolean bindPermission(Long roleId, Long permissionId);
 
-	Object list(int permissionType, PageParam pageParam);
+	Boolean unBindPermission(Long roleId, Long permissionId);
 }

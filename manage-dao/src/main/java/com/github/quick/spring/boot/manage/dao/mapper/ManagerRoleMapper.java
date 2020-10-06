@@ -19,7 +19,10 @@ package com.github.quick.spring.boot.manage.dao.mapper;
 import java.util.List;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.quick.spring.boot.manage.dao.entity.ManagerRole;
+import com.github.quick.spring.boot.manage.model.req.role.QueryRoleParam;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -34,4 +37,9 @@ public interface ManagerRoleMapper extends BaseMapper<ManagerRole> {
 	int insertOrUpdate(ManagerRole record);
 
 	int insertOrUpdateSelective(ManagerRole record);
+
+	ManagerRole findByName(@Param("name") String name);
+
+	IPage<ManagerRole> query(@Param("roleIPage") Page<ManagerRole> roleIPage, @Param("param") QueryRoleParam param);
+
 }

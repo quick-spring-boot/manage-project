@@ -23,7 +23,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.quick.spring.boot.manage.common.ex.ManagerCommonException;
 import com.github.quick.spring.boot.manage.dao.entity.ManagerUser;
+import com.github.quick.spring.boot.manage.dao.entity.MiddleUserDepartment;
 import com.github.quick.spring.boot.manage.dao.mapper.ManagerUserMapper;
+import com.github.quick.spring.boot.manage.dao.mapper.MiddleUserDepartmentMapper;
 import com.github.quick.spring.boot.manage.model.req.page.PageParam;
 import com.github.quick.spring.boot.manage.model.req.user.ManagerUserCreateParam;
 import com.github.quick.spring.boot.manage.model.res.ManagerUserResponse;
@@ -50,6 +52,8 @@ public class ManagerUserBizServiceImpl implements ManagerUserBizService {
 
 	private final TokenService tokenService;
 
+	@Autowired
+	private MiddleUserDepartmentMapper middleUserDepartmentMapper;
 
 	public ManagerUserBizServiceImpl(
 			ManagerUserMapper managerUserMapper,
@@ -163,5 +167,32 @@ public class ManagerUserBizServiceImpl implements ManagerUserBizService {
 			throw new ManagerCommonException("token 中用户id不存在");
 		}
 		return this.byId(Long.parseLong(userId));
+	}
+
+	@Override
+	public Boolean bindDepartment(Long userId, Long deptId) {
+
+		MiddleUserDepartment middleUserDepartment = middleUserDepartmentMapper.findByUserIdAndDeptId(userId, deptId);
+
+		if (middleUserDepartment == null) {
+			MiddleUserDepartment insert = new MiddleUserDepartment();
+			insert.setDepartmentId(deptId);
+			insert.setUserId(userId);
+			return this.middleUserDepartmentMapper.insert(insert) > 0;
+		}
+		else {
+			throw new ManagerCommonException("已存在绑定关系");
+		}
+	}
+
+	@Override
+	public Boolean unBindDepartment(Long userId, Long deptId) {
+		MiddleUserDepartment middleUserDepartment = middleUserDepartmentMapper.findByUserIdAndDeptId(userId, deptId);
+
+		if (middleUserDepartment != null) {
+			Long id = middleUserDepartment.getId();
+			return this.middleUserDepartmentMapper.deleteById(id) > 0;
+		}
+		return false;
 	}
 }

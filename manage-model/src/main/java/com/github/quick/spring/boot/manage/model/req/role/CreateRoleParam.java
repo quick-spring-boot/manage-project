@@ -14,12 +14,16 @@
  * limitations under the License.
  */
 
-package com.github.quick.spring.boot.manage.rest.controller.department.bind;
+package com.github.quick.spring.boot.manage.model.req.role;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+public class CreateRoleParam {
+	private String name;
 
-@RestController
-@RequestMapping("/department/bind")
-public class DepartmentBindController {
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

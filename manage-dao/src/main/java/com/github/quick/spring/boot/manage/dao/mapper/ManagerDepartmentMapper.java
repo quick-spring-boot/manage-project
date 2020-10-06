@@ -34,4 +34,9 @@ public interface ManagerDepartmentMapper extends BaseMapper<ManagerDepartment> {
 	int insertOrUpdate(ManagerDepartment record);
 
 	int insertOrUpdateSelective(ManagerDepartment record);
+
+	List<ManagerDepartment> findByPid(@Param("deptId") Long deptId);
+
+	ManagerDepartment findByName(@Param("name") String name);
+
 }

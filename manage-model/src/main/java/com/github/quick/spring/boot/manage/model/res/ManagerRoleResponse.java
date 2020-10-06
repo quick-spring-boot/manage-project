@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 
-package com.github.quick.spring.boot.manage.service.permission;
+package com.github.quick.spring.boot.manage.model.res;
 
-import com.github.quick.spring.boot.manage.model.req.page.PageParam;
-import com.github.quick.spring.boot.manage.model.req.permission.CreatePermission;
+public class ManagerRoleResponse {
+	private String name;
 
-public interface ManagerPermissionService {
-	boolean save(CreatePermission createPermission);
+	public String getName() {
+		return name;
+	}
 
-	boolean delete(Long permissionId);
-
-	Object list(int permissionType, PageParam pageParam);
+	public void setName(String name) {
+		this.name = name;
+	}
 }

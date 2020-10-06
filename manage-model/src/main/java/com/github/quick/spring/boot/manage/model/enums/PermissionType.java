@@ -17,6 +17,8 @@
 package com.github.quick.spring.boot.manage.model.enums;
 
 
+import javax.print.attribute.standard.PrinterMessageFromOperator;
+
 public enum PermissionType {
 	BUTTON(2, "manager_button"), MENU(1, "manager_menu"), API(3, "manager_api"),
 	;
@@ -28,6 +30,7 @@ public enum PermissionType {
 	private final int code;
 
 	private final String tableName;
+
 
 	PermissionType(int code, String tableName) {
 		this.code = code;

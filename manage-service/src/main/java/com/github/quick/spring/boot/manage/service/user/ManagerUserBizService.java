@@ -50,4 +50,8 @@ public interface ManagerUserBizService {
 
 
 	ManagerUserResponse findUserByToken(String accessToken);
+
+	Boolean bindDepartment(Long userId, Long deptId);
+
+	Boolean unBindDepartment(Long userId, Long deptId);
 }

@@ -50,9 +50,4 @@ public class HealthyController {
 		return new ResultVo<>(200, "test", map);
 	}
 
-	@GetMapping("/error")
-	public ResultVo<String> error() {
-		int i = 1 / 0;
-		return OkResponse.SAVE_SUCCESS.ret();
-	}
 }

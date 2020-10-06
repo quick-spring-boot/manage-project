@@ -253,4 +253,18 @@
 			</if>
 		</trim>
 	</insert>
+
+	<select id="findByName" resultMap="BaseResultMap">
+		select * from manager_role where
+		<if test="name != null and name != ''">
+			name = #{name}
+		</if>
+	</select>
+
+	<select id="query" resultType="com.github.quick.spring.boot.manage.dao.entity.ManagerRole">
+		select * from manager_role where 1=1
+		<if test="param.name != null and param.name != ''">
+			<![CDATA[ and  `name` like CONCAT('%',#{param.name},'%')]]>
+		</if>
+	</select>
 </mapper>

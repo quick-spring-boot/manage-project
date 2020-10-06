@@ -16,8 +16,11 @@
 
 package com.github.quick.spring.boot.manage.service.permission.impl;
 
-import java.beans.Transient;
+import java.util.Collections;
+import java.util.List;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.github.quick.spring.boot.manage.common.ex.ManagerCommonException;
 import com.github.quick.spring.boot.manage.dao.entity.ManagerApi;
 import com.github.quick.spring.boot.manage.dao.entity.ManagerButton;
@@ -25,8 +28,10 @@ import com.github.quick.spring.boot.manage.dao.entity.ManagerMenu;
 import com.github.quick.spring.boot.manage.dao.entity.ManagerPermission;
 import com.github.quick.spring.boot.manage.dao.mapper.ManagerPermissionMapper;
 import com.github.quick.spring.boot.manage.model.enums.PermissionType;
+import com.github.quick.spring.boot.manage.model.req.page.PageParam;
 import com.github.quick.spring.boot.manage.model.req.permission.CreatePermission;
 import com.github.quick.spring.boot.manage.model.req.permission.FullPermission;
+import com.github.quick.spring.boot.manage.model.res.PermissionInfoResponse;
 import com.github.quick.spring.boot.manage.service.permission.ApiPermissionService;
 import com.github.quick.spring.boot.manage.service.permission.ButtonPermissionService;
 import com.github.quick.spring.boot.manage.service.permission.ManagerPermissionService;
@@ -111,4 +116,40 @@ public class ManagerPermissionServiceImpl implements ManagerPermissionService {
 		return false;
 	}
 
+
+	@Override
+	public boolean delete(Long permissionId) {
+		return this.permissionMapper.deleteById(permissionId) > 0;
+	}
+
+	@Override
+	public Object list(int permissionType, PageParam pageParam) {
+
+		PermissionType convert = PermissionType.convert(permissionType);
+
+		if (convert == PermissionType.BUTTON) {
+
+			PageHelper.startPage(pageParam.getPageCount(), pageParam.getPageSize());
+			List<PermissionInfoResponse> byButton = this.permissionMapper.findByButton(convert.getTableName());
+			PageInfo pageInfo = new PageInfo<>(byButton);
+
+
+			return pageInfo;
+		}
+		else if (convert == PermissionType.MENU) {
+			PageHelper.startPage(pageParam.getPageCount(), pageParam.getPageSize());
+			List<PermissionInfoResponse> byMenu = this.permissionMapper.findByMenu(convert.getTableName());
+			PageInfo pageInfo = new PageInfo<>(byMenu);
+			return pageInfo;
+		}
+		else if (convert == PermissionType.API) {
+			PageHelper.startPage(pageParam.getPageCount(), pageParam.getPageSize());
+			List<PermissionInfoResponse> byApi = this.permissionMapper.findByApi(convert.getTableName());
+			PageInfo pageInfo = new PageInfo<>(byApi);
+			return pageInfo;
+		}
+
+
+		return Collections.emptyList();
+	}
 }

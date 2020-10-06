@@ -278,4 +278,18 @@
 			</if>
 		</trim>
 	</insert>
+
+	<select id="findByPid" resultMap="BaseResultMap">
+		select  * from manager_department where
+		<if test="deptId != null">
+			pid = #{deptId,jdbcType=BIGINT}
+		</if>
+	</select>
+
+	<select id="findByName" resultMap="BaseResultMap">
+		select * from manager_department where
+		<if test="name != null and name != ''">
+			name = #{name}
+		</if>
+	</select>
 </mapper>

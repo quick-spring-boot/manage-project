@@ -16,7 +16,11 @@
 
 package com.github.quick.spring.boot.manage.rest.config;
 
-import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
+import java.util.Properties;
+
+import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import com.github.pagehelper.PageInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
 
 import org.springframework.context.annotation.Bean;
@@ -29,5 +33,15 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @MapperScan("com.github.quick.spring.boot.manage.dao.mapper")
 public class MapperConfig {
+
+//	@Bean
+//	public PaginationInnerInterceptor paginationInnerInterceptor() {
+//		PaginationInnerInterceptor paginationInnerInterceptor = new PaginationInnerInterceptor();
+//		paginationInnerInterceptor.setDbType(DbType.MYSQL);
+//		return paginationInnerInterceptor;
+//	}
+
+
+
 
 }

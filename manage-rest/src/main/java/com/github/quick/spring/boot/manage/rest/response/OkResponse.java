@@ -22,6 +22,7 @@ public enum OkResponse {
 	SAVE_SUCCESS(200, "保存成功"),
 	UPDATE_SUCCESS(200, "更新成功"),
 	QUERY_SUCCESS(200, "查询成功"),
+	DELETE_SUCCESS(200, "删除成功"),
 	HEALTHY_SUCCESS(200, "健康"),
 	GENERATOR_TOKEN_SUCCESS(200, "token生成成功"),
 	;

@@ -34,4 +34,6 @@ public interface MiddleRolePermissionMapper extends BaseMapper<MiddleRolePermiss
 	int insertOrUpdate(MiddleRolePermission record);
 
 	int insertOrUpdateSelective(MiddleRolePermission record);
+
+	MiddleRolePermission findByRoleAndPermissionId(@Param("roleId") Long roleId, @Param("permissionId") Long permissionId);
 }

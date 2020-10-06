@@ -14,15 +14,23 @@
  * limitations under the License.
  */
 
-package com.github.quick.spring.boot.manage.service.permission;
+package com.github.quick.spring.boot.manage.service.dept;
 
+import java.util.List;
+
+import com.github.quick.spring.boot.manage.model.req.dept.CreateDeptParam;
+import com.github.quick.spring.boot.manage.model.req.dept.QueryDeptParam;
 import com.github.quick.spring.boot.manage.model.req.page.PageParam;
-import com.github.quick.spring.boot.manage.model.req.permission.CreatePermission;
+import com.github.quick.spring.boot.manage.model.res.ManagerDeptResponse;
 
-public interface ManagerPermissionService {
-	boolean save(CreatePermission createPermission);
+public interface DeptService {
+	List<ManagerDeptResponse> child(Long deptId);
 
-	boolean delete(Long permissionId);
+	ManagerDeptResponse byId(Long deptId);
 
-	Object list(int permissionType, PageParam pageParam);
+	Object query(QueryDeptParam param, PageParam pageParam);
+
+	boolean update(Long deptId, CreateDeptParam param);
+
+	boolean create(CreateDeptParam param);
 }
