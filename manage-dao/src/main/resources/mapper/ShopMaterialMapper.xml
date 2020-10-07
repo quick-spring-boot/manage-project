@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.quick.spring.boot.manage.dao.mapper.ShopMaterialMapper">
+  <resultMap id="BaseResultMap" type="com.github.quick.spring.boot.manage.dao.entity.ShopMaterial">
+    <!--@mbg.generated-->
+    <!--@Table shop_material-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="shop_audit_id" jdbcType="BIGINT" property="shopAuditId" />
+    <result column="food_license" jdbcType="VARCHAR" property="foodLicense" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user" jdbcType="BIGINT" property="createUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_user" jdbcType="BIGINT" property="updateUser" />
+    <result column="version" jdbcType="BIGINT" property="version" />
+    <result column="deleted" jdbcType="TINYINT" property="deleted" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, shop_audit_id, food_license, create_time, create_user, update_time, update_user, 
+    version, deleted
+  </sql>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update shop_material
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="shop_audit_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.shopAuditId,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="food_license = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.foodLicense,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="create_user = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.createUser,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="update_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.updateTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="update_user = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.updateUser,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="version = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.version,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="deleted = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.deleted,jdbcType=TINYINT}
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update shop_material
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="shop_audit_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.shopAuditId != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.shopAuditId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="food_license = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.foodLicense != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.foodLicense,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createTime != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_user = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createUser != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.createUser,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="update_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.updateTime != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.updateTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="update_user = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.updateUser != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.updateUser,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="version = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.version != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.version,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="deleted = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.deleted != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.deleted,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into shop_material
+    (shop_audit_id, food_license, create_time, create_user, update_time, update_user, 
+      version, deleted)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.shopAuditId,jdbcType=BIGINT}, #{item.foodLicense,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, 
+        #{item.createUser,jdbcType=BIGINT}, #{item.updateTime,jdbcType=TIMESTAMP}, #{item.updateUser,jdbcType=BIGINT}, 
+        #{item.version,jdbcType=BIGINT}, #{item.deleted,jdbcType=TINYINT})
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="com.github.quick.spring.boot.manage.dao.entity.ShopMaterial" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into shop_material
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      shop_audit_id,
+      food_license,
+      create_time,
+      create_user,
+      update_time,
+      update_user,
+      version,
+      deleted,
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      #{shopAuditId,jdbcType=BIGINT},
+      #{foodLicense,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP},
+      #{createUser,jdbcType=BIGINT},
+      #{updateTime,jdbcType=TIMESTAMP},
+      #{updateUser,jdbcType=BIGINT},
+      #{version,jdbcType=BIGINT},
+      #{deleted,jdbcType=TINYINT},
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      shop_audit_id = #{shopAuditId,jdbcType=BIGINT},
+      food_license = #{foodLicense,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=BIGINT},
+      version = #{version,jdbcType=BIGINT},
+      deleted = #{deleted,jdbcType=TINYINT},
+    </trim>
+  </insert>
+  <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="com.github.quick.spring.boot.manage.dao.entity.ShopMaterial" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into shop_material
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="shopAuditId != null">
+        shop_audit_id,
+      </if>
+      <if test="foodLicense != null">
+        food_license,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="shopAuditId != null">
+        #{shopAuditId,jdbcType=BIGINT},
+      </if>
+      <if test="foodLicense != null">
+        #{foodLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=BIGINT},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=TINYINT},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      <if test="shopAuditId != null">
+        shop_audit_id = #{shopAuditId,jdbcType=BIGINT},
+      </if>
+      <if test="foodLicense != null">
+        food_license = #{foodLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=BIGINT},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

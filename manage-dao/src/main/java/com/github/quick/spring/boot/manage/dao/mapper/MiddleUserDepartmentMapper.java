@@ -36,4 +36,6 @@ public interface MiddleUserDepartmentMapper extends BaseMapper<MiddleUserDepartm
 	int insertOrUpdateSelective(MiddleUserDepartment record);
 
 	MiddleUserDepartment findByUserIdAndDeptId(@Param("userId") Long userId, @Param("deptId") Long deptId);
+
+	List<MiddleUserDepartment> findByDeptIds(@Param("shopAuditDeptIds") List<Long> shopAuditDeptIds);
 }

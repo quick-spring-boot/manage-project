@@ -1,0 +1,8 @@
+{
+  "code": 200,
+  "message": "token生成成功",
+  "data": {
+    "refreshToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxIiwiZXhwIjoxNjAxOTQ3OTk5fQ.Lm-gtjNnk1ZZwAX16UIE_9iOkmtGTOOWdmc3pxHhzKA",
+    "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxIiwiZXhwIjoxNjAxOTQ4MTE5fQ.WLmnOsdFvWpTsLJ8R3Auaj5yF38q1sQ6FUbx4s0r8vs"
+  }
+}

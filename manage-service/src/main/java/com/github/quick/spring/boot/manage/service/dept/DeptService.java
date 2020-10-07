@@ -18,6 +18,7 @@ package com.github.quick.spring.boot.manage.service.dept;
 
 import java.util.List;
 
+import com.github.quick.spring.boot.manage.dao.entity.ManagerDepartment;
 import com.github.quick.spring.boot.manage.model.req.dept.CreateDeptParam;
 import com.github.quick.spring.boot.manage.model.req.dept.QueryDeptParam;
 import com.github.quick.spring.boot.manage.model.req.page.PageParam;
@@ -33,4 +34,10 @@ public interface DeptService {
 	boolean update(Long deptId, CreateDeptParam param);
 
 	boolean create(CreateDeptParam param);
+
+	/**
+	 * 寻找商铺部门
+	 * @return
+	 */
+	List<ManagerDepartment> shopShopAudit();
 }

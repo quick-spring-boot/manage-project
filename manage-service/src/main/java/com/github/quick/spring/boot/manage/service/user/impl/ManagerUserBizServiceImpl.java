@@ -17,20 +17,26 @@
 package com.github.quick.spring.boot.manage.service.user.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.quick.spring.boot.manage.common.ex.ManagerCommonException;
+import com.github.quick.spring.boot.manage.dao.entity.ManagerDepartment;
 import com.github.quick.spring.boot.manage.dao.entity.ManagerUser;
 import com.github.quick.spring.boot.manage.dao.entity.MiddleUserDepartment;
+import com.github.quick.spring.boot.manage.dao.mapper.ManagerUserExtendsMapper;
 import com.github.quick.spring.boot.manage.dao.mapper.ManagerUserMapper;
 import com.github.quick.spring.boot.manage.dao.mapper.MiddleUserDepartmentMapper;
 import com.github.quick.spring.boot.manage.model.req.page.PageParam;
 import com.github.quick.spring.boot.manage.model.req.user.ManagerUserCreateParam;
 import com.github.quick.spring.boot.manage.model.res.ManagerUserResponse;
 import com.github.quick.spring.boot.manage.model.res.TokenCollection;
+import com.github.quick.spring.boot.manage.service.dept.DeptService;
 import com.github.quick.spring.boot.manage.service.factory.convert.ParamConvert;
+import com.github.quick.spring.boot.manage.model.dto.ManagerUserDevice;
 import com.github.quick.spring.boot.manage.service.user.ManagerUserBizService;
 import com.github.quick.spring.boot.manage.service.user.token.TokenService;
 import org.slf4j.Logger;
@@ -39,6 +45,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 @Service("managerUserBizServiceImpl")
@@ -54,6 +61,12 @@ public class ManagerUserBizServiceImpl implements ManagerUserBizService {
 
 	@Autowired
 	private MiddleUserDepartmentMapper middleUserDepartmentMapper;
+
+	@Autowired
+	private DeptService deptService;
+
+	@Autowired
+	private ManagerUserExtendsMapper managerUserExtendsMapper;
 
 	public ManagerUserBizServiceImpl(
 			ManagerUserMapper managerUserMapper,
@@ -194,5 +207,28 @@ public class ManagerUserBizServiceImpl implements ManagerUserBizService {
 			return this.middleUserDepartmentMapper.deleteById(id) > 0;
 		}
 		return false;
+	}
+
+	@Override
+	public List<ManagerUser> findShopAudit() {
+		List<ManagerDepartment> managerDepartments = deptService.shopShopAudit();
+		if (!CollectionUtils.isEmpty(managerDepartments)) {
+			List<Long> shopAuditDeptIds = managerDepartments.stream().map(s -> {
+				return s.getId();
+			}).collect(Collectors.toList());
+
+
+			return this.managerUserMapper.queryDeptIds(shopAuditDeptIds);
+
+		}
+		return Collections.emptyList();
+	}
+
+	@Override
+	public ManagerUserDevice userDevice(Long userId) {
+		if (userId != null) {
+			throw new ManagerCommonException("用户id不能为空");
+		}
+		return managerUserExtendsMapper.findByUserId(userId);
 	}
 }

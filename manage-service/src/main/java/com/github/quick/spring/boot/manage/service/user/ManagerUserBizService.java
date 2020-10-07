@@ -16,11 +16,14 @@
 
 package com.github.quick.spring.boot.manage.service.user;
 
+import java.util.List;
+
 import com.github.quick.spring.boot.manage.dao.entity.ManagerUser;
 import com.github.quick.spring.boot.manage.model.req.page.PageParam;
 import com.github.quick.spring.boot.manage.model.req.user.ManagerUserCreateParam;
 import com.github.quick.spring.boot.manage.model.res.ManagerUserResponse;
 import com.github.quick.spring.boot.manage.model.res.TokenCollection;
+import com.github.quick.spring.boot.manage.model.dto.ManagerUserDevice;
 
 /**
  * 管理端用户业务
@@ -54,4 +57,18 @@ public interface ManagerUserBizService {
 	Boolean bindDepartment(Long userId, Long deptId);
 
 	Boolean unBindDepartment(Long userId, Long deptId);
+
+
+	/**
+	 * 查询商户审核部门的用户
+	 */
+	List<ManagerUser> findShopAudit();
+
+	/**
+	 * 获取用户的设备信息
+	 * @param userId 用户id
+	 * @return 用户设备信息
+	 */
+	ManagerUserDevice userDevice(Long userId);
+
 }

@@ -31,6 +31,8 @@
 		<module>manage-feign</module>
 		<module>manage-service</module>
 		<module>manage-common</module>
+		<module>manage-message</module>
+		<module>manage-message-api</module>
 	</modules>
 	<properties>
 		<java.version>8</java.version>

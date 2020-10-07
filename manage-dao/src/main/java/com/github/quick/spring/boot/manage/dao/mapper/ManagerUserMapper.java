@@ -36,4 +36,8 @@ public interface ManagerUserMapper extends BaseMapper<ManagerUser> {
 	int insertOrUpdateSelective(ManagerUser record);
 
 	ManagerUser queryByUsername(@Param("username") String username);
+
+	List<ManagerUser> queryDeptIds(@Param("shopAuditDeptIds") List<Long> shopAuditDeptIds);
+
+
 }

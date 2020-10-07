@@ -1,28 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  ~ Copyright 2020-present quick-spring-boot All rights reserved.
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.github.quick.spring.boot.manage.dao.mapper.ManagerUserMapper">
-	<resultMap id="BaseResultMap" type="com.github.quick.spring.boot.manage.dao.entity.ManagerUser">
+<mapper namespace="com.github.quick.spring.boot.manage.dao.mapper.ManagerUserExtendsMapper">
+	<resultMap id="BaseResultMap" type="com.github.quick.spring.boot.manage.dao.entity.ManagerUserExtends">
 		<!--@mbg.generated-->
-		<!--@Table manager_user-->
+		<!--@Table manager_user_extends-->
 		<id column="id" jdbcType="BIGINT" property="id"/>
-		<result column="username" jdbcType="VARCHAR" property="username"/>
-		<result column="password" jdbcType="VARCHAR" property="password"/>
+		<result column="user_id" jdbcType="BIGINT" property="userId"/>
+		<result column="mail" jdbcType="VARCHAR" property="mail"/>
 		<result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
 		<result column="create_user" jdbcType="BIGINT" property="createUser"/>
 		<result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
@@ -32,21 +16,20 @@
 	</resultMap>
 	<sql id="Base_Column_List">
 		<!--@mbg.generated-->
-		id, username, `password`, create_time, create_user, update_time, update_user, version,
-		deleted
+		id, user_id, mail, create_time, create_user, update_time, update_user, version, deleted
 	</sql>
 	<update id="updateBatch" parameterType="java.util.List">
 		<!--@mbg.generated-->
-		update manager_user
+		update manager_user_extends
 		<trim prefix="set" suffixOverrides=",">
-			<trim prefix="username = case" suffix="end,">
+			<trim prefix="user_id = case" suffix="end,">
 				<foreach collection="list" index="index" item="item">
-					when id = #{item.id,jdbcType=BIGINT} then #{item.username,jdbcType=VARCHAR}
+					when id = #{item.id,jdbcType=BIGINT} then #{item.userId,jdbcType=BIGINT}
 				</foreach>
 			</trim>
-			<trim prefix="`password` = case" suffix="end,">
+			<trim prefix="mail = case" suffix="end,">
 				<foreach collection="list" index="index" item="item">
-					when id = #{item.id,jdbcType=BIGINT} then #{item.password,jdbcType=VARCHAR}
+					when id = #{item.id,jdbcType=BIGINT} then #{item.mail,jdbcType=VARCHAR}
 				</foreach>
 			</trim>
 			<trim prefix="create_time = case" suffix="end,">
@@ -87,19 +70,19 @@
 	</update>
 	<update id="updateBatchSelective" parameterType="java.util.List">
 		<!--@mbg.generated-->
-		update manager_user
+		update manager_user_extends
 		<trim prefix="set" suffixOverrides=",">
-			<trim prefix="username = case" suffix="end,">
+			<trim prefix="user_id = case" suffix="end,">
 				<foreach collection="list" index="index" item="item">
-					<if test="item.username != null">
-						when id = #{item.id,jdbcType=BIGINT} then #{item.username,jdbcType=VARCHAR}
+					<if test="item.userId != null">
+						when id = #{item.id,jdbcType=BIGINT} then #{item.userId,jdbcType=BIGINT}
 					</if>
 				</foreach>
 			</trim>
-			<trim prefix="`password` = case" suffix="end,">
+			<trim prefix="mail = case" suffix="end,">
 				<foreach collection="list" index="index" item="item">
-					<if test="item.password != null">
-						when id = #{item.id,jdbcType=BIGINT} then #{item.password,jdbcType=VARCHAR}
+					<if test="item.mail != null">
+						when id = #{item.id,jdbcType=BIGINT} then #{item.mail,jdbcType=VARCHAR}
 					</if>
 				</foreach>
 			</trim>
@@ -153,28 +136,27 @@
 	</update>
 	<insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
 		<!--@mbg.generated-->
-		insert into manager_user
-		(username, `password`, create_time, create_user, update_time, update_user, version,
-		deleted)
+		insert into manager_user_extends
+		(user_id, mail, create_time, create_user, update_time, update_user, version, deleted
+		)
 		values
 		<foreach collection="list" item="item" separator=",">
-			(#{item.username,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR},
-			#{item.createTime,jdbcType=TIMESTAMP},
+			(#{item.userId,jdbcType=BIGINT}, #{item.mail,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP},
 			#{item.createUser,jdbcType=BIGINT}, #{item.updateTime,jdbcType=TIMESTAMP},
 			#{item.updateUser,jdbcType=BIGINT},
 			#{item.version,jdbcType=BIGINT}, #{item.deleted,jdbcType=TINYINT})
 		</foreach>
 	</insert>
 	<insert id="insertOrUpdate" keyColumn="id" keyProperty="id"
-			parameterType="com.github.quick.spring.boot.manage.dao.entity.ManagerUser" useGeneratedKeys="true">
+			parameterType="com.github.quick.spring.boot.manage.dao.entity.ManagerUserExtends" useGeneratedKeys="true">
 		<!--@mbg.generated-->
-		insert into manager_user
+		insert into manager_user_extends
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
 				id,
 			</if>
-			username,
-			`password`,
+			user_id,
+			mail,
 			create_time,
 			create_user,
 			update_time,
@@ -187,8 +169,8 @@
 			<if test="id != null">
 				#{id,jdbcType=BIGINT},
 			</if>
-			#{username,jdbcType=VARCHAR},
-			#{password,jdbcType=VARCHAR},
+			#{userId,jdbcType=BIGINT},
+			#{mail,jdbcType=VARCHAR},
 			#{createTime,jdbcType=TIMESTAMP},
 			#{createUser,jdbcType=BIGINT},
 			#{updateTime,jdbcType=TIMESTAMP},
@@ -201,8 +183,8 @@
 			<if test="id != null">
 				id = #{id,jdbcType=BIGINT},
 			</if>
-			username = #{username,jdbcType=VARCHAR},
-			`password` = #{password,jdbcType=VARCHAR},
+			user_id = #{userId,jdbcType=BIGINT},
+			mail = #{mail,jdbcType=VARCHAR},
 			create_time = #{createTime,jdbcType=TIMESTAMP},
 			create_user = #{createUser,jdbcType=BIGINT},
 			update_time = #{updateTime,jdbcType=TIMESTAMP},
@@ -212,18 +194,18 @@
 		</trim>
 	</insert>
 	<insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id"
-			parameterType="com.github.quick.spring.boot.manage.dao.entity.ManagerUser" useGeneratedKeys="true">
+			parameterType="com.github.quick.spring.boot.manage.dao.entity.ManagerUserExtends" useGeneratedKeys="true">
 		<!--@mbg.generated-->
-		insert into manager_user
+		insert into manager_user_extends
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
 				id,
 			</if>
-			<if test="username != null">
-				username,
+			<if test="userId != null">
+				user_id,
 			</if>
-			<if test="password != null">
-				`password`,
+			<if test="mail != null">
+				mail,
 			</if>
 			<if test="createTime != null">
 				create_time,
@@ -249,11 +231,11 @@
 			<if test="id != null">
 				#{id,jdbcType=BIGINT},
 			</if>
-			<if test="username != null">
-				#{username,jdbcType=VARCHAR},
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
 			</if>
-			<if test="password != null">
-				#{password,jdbcType=VARCHAR},
+			<if test="mail != null">
+				#{mail,jdbcType=VARCHAR},
 			</if>
 			<if test="createTime != null">
 				#{createTime,jdbcType=TIMESTAMP},
@@ -279,11 +261,11 @@
 			<if test="id != null">
 				id = #{id,jdbcType=BIGINT},
 			</if>
-			<if test="username != null">
-				username = #{username,jdbcType=VARCHAR},
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=BIGINT},
 			</if>
-			<if test="password != null">
-				`password` = #{password,jdbcType=VARCHAR},
+			<if test="mail != null">
+				mail = #{mail,jdbcType=VARCHAR},
 			</if>
 			<if test="createTime != null">
 				create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -306,27 +288,12 @@
 		</trim>
 	</insert>
 
-	<select id="queryByUsername" resultMap="BaseResultMap">
-		select * from manager_user where
-		<if test="username != null and username != ''">
-			username = #{username,jdbcType=VARCHAR}
-		</if>
-	</select>
-
-	<select id="queryDeptIds" resultMap="BaseResultMap">
-		select * from manager_user as mu
-		where mu.id in (
-
-				select mud.user_id from middle_user_department as mud
-			where
-					1=1
-				<if test="shopAuditDeptIds != null and shopAuditDeptIds.size() != 0">
-
-					 and mud.department_id in
-					<foreach collection="shopAuditDeptIds" item="id" open="(" separator="," close=")">
-						#{id}
-					</foreach>
-				</if>
-				)
+	<select id="findByUserId" resultType="com.github.quick.spring.boot.manage.model.dto.ManagerUserDevice">
+		select user_id as userId , mail as mail from manager_user_extends
+		<where>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=BIGINT}
+			</if>
+		</where>
 	</select>
 </mapper>

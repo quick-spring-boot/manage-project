@@ -145,4 +145,15 @@
 			and user_id = #{userId,jdbcType=BIGINT}
 		</if>
 	</select>
+
+	<select id="findByDeptIds" resultMap="BaseResultMap">
+		select * from middle_user_department mud
+		where 1= 1
+		and mud.department_id in
+		<if test="shopAuditDeptIds != null and shopAuditDeptIds.size() != 0">
+			<foreach collection="shopAuditDeptIds" item="id" open="(" separator="," close=")">
+				#{id}
+			</foreach>
+		</if>
+	</select>
 </mapper>

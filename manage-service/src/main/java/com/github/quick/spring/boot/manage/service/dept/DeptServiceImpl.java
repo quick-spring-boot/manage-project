@@ -24,12 +24,14 @@ import java.util.stream.Collectors;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.quick.spring.boot.manage.common.ex.ManagerCommonException;
 import com.github.quick.spring.boot.manage.dao.entity.ManagerDepartment;
 import com.github.quick.spring.boot.manage.dao.mapper.ManagerDepartmentMapper;
 import com.github.quick.spring.boot.manage.model.req.dept.CreateDeptParam;
 import com.github.quick.spring.boot.manage.model.req.dept.QueryDeptParam;
 import com.github.quick.spring.boot.manage.model.req.page.PageParam;
 import com.github.quick.spring.boot.manage.model.res.ManagerDeptResponse;
+import com.github.quick.spring.boot.manage.service.constant.DeptType;
 import com.github.quick.spring.boot.manage.service.factory.convert.ParamConvert;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +41,11 @@ import org.springframework.util.StringUtils;
 
 @Service
 public class DeptServiceImpl implements DeptService {
+
+	/**
+	 * 预设的部门名称
+	 */
+	private final List<String> presuppositionDeptName = DeptType.names();
 
 	@Autowired
 	private ManagerDepartmentMapper departmentMapper;
@@ -92,6 +99,11 @@ public class DeptServiceImpl implements DeptService {
 	public boolean update(Long deptId, CreateDeptParam param) {
 
 		ManagerDepartment managerDepartment = this.departmentMapper.selectById(deptId);
+
+		if (presuppositionDeptName.contains(managerDepartment.getName())) {
+			throw new ManagerCommonException("系统预设名称不能修改");
+		}
+
 		if (managerDepartment != null) {
 			ManagerDepartment db = this.departmentMapper.findByName(param.getName());
 			if (db == null) {
@@ -111,5 +123,19 @@ public class DeptServiceImpl implements DeptService {
 	public boolean create(CreateDeptParam param) {
 		ManagerDepartment convert = paramConvert.convert(param, ManagerDepartment.class);
 		return departmentMapper.insert(convert) > 0;
+	}
+
+	@Override
+	public List<ManagerDepartment> shopShopAudit() {
+		List<ManagerDepartment> res = new ArrayList<>();
+		ManagerDepartment byName = this.departmentMapper.findByName(DeptType.ShopAudit.getName());
+		if (byName != null) {
+			res.add(byName);
+			List<ManagerDepartment> byPid = this.departmentMapper.findByPid(byName.getId());
+			if (!byPid.isEmpty()) {
+				res.addAll(byPid);
+			}
+		}
+		return res;
 	}
 }
