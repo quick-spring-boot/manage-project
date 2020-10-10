@@ -41,5 +41,12 @@ public class DemoService {
 		sendMessage.sendMail("data", managerUserDevice);
 	}
 
+//	@Bean
+//	public ApplicationRunner runner() {
+//		return args -> {
+//			this.setSendMessage();
+//
+//		};
+//	}
 
 }

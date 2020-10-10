@@ -17,10 +17,14 @@
 package com.github.quick.spring.boot.manage.rest;
 
 
+import com.alibaba.nacos.spring.context.annotation.discovery.EnableNacosDiscovery;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication(scanBasePackages = "com.github.quick.spring.boot.manage.*")
+@EnableDiscoveryClient
 public class ManageRestApp {
 
 

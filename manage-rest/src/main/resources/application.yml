@@ -69,5 +69,13 @@ pagehelper:
 
 
 dubbo:
+  scan:
+    base-packages: com.github.quick.spring.boot.manage.message
+
   registry:
     address: nacos://localhost:8848
+
+
+nacos:
+  discovery:
+    server-addr: localhost:8848
