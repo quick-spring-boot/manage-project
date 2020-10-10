@@ -22,8 +22,6 @@ import com.github.quick.spring.boot.manage.model.req.page.PageParam;
 import com.github.quick.spring.boot.manage.model.vo.ResultVo;
 import com.github.quick.spring.boot.manage.rest.response.OkResponse;
 import com.github.quick.spring.boot.manage.service.dept.DeptService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,7 +39,6 @@ public class DepartmentController {
 	private DeptService deptService;
 
 
-	@ApiOperation(value = "创建部门")
 	@PostMapping("/")
 	public ResultVo<Boolean> create(
 			@RequestBody CreateDeptParam param
@@ -50,10 +47,9 @@ public class DepartmentController {
 		return OkResponse.SAVE_SUCCESS.ret(deptService.create(param));
 	}
 
-	@ApiOperation(value = "修改部门信息")
 	@PutMapping("/{dept_id}")
 	public ResultVo<Boolean> update(
-			@ApiParam(value = "部门id") @PathVariable(value = "dept_id") Long deptId,
+			 @PathVariable(value = "dept_id") Long deptId,
 			@RequestBody CreateDeptParam param
 
 	) {
@@ -61,7 +57,6 @@ public class DepartmentController {
 	}
 
 
-	@ApiOperation(value = "查询部门列表")
 	@GetMapping("/query")
 	public ResultVo<Object> query(
 			QueryDeptParam param,
@@ -70,19 +65,17 @@ public class DepartmentController {
 		return OkResponse.QUERY_SUCCESS.ret(deptService.query(param,pageParam));
 	}
 
-	@ApiOperation(value = "根据ID查询部门详情")
 	@GetMapping("/{dept_id}")
 	public ResultVo<Object> byId(
-			@ApiParam(value = "部门id") @PathVariable(value = "dept_id") Long deptId
+			 @PathVariable(value = "dept_id") Long deptId
 	) {
 		return OkResponse.QUERY_SUCCESS.ret(deptService.byId(deptId));
 	}
 
 
-	@ApiOperation(value = "下级部门列表")
 	@GetMapping("/child/{dept_id}")
 	public ResultVo<Object> child(
-			@ApiParam(value = "部门id") @PathVariable(value = "dept_id") Long deptId
+			 @PathVariable(value = "dept_id") Long deptId
 	) {
 		return OkResponse.QUERY_SUCCESS.ret(deptService.child(deptId));
 	}

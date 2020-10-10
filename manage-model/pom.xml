@@ -29,10 +29,4 @@
 
 	<name>manage-model</name>
 
-	<dependencies>
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-boot-starter</artifactId>
-		</dependency>
-	</dependencies>
 </project>

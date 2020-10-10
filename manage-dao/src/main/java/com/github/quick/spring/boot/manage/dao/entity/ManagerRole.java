@@ -24,66 +24,55 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 角色表
  */
-@ApiModel(value = "com-github-quick-spring-boot-manage-dao-entity-ManagerRole")
 @TableName(value = "manager_role")
 public class ManagerRole implements Serializable {
 	@TableId(value = "id", type = IdType.AUTO)
-	@ApiModelProperty(value = "")
 	private Long id;
 
 	/**
 	 * 角色名称
 	 */
 	@TableField(value = "`name`")
-	@ApiModelProperty(value = "角色名称")
 	private String name;
 
 	/**
 	 * 创建时间
 	 */
-	@TableField(value = "create_time",fill = FieldFill.INSERT)
-	@ApiModelProperty(value = "创建时间")
+	@TableField(value = "create_time", fill = FieldFill.INSERT)
 	private Date createTime;
 
 	/**
 	 * 创建人
 	 */
 	@TableField(value = "create_user")
-	@ApiModelProperty(value = "创建人")
 	private Long createUser;
 
 	/**
 	 * 更新时间
 	 */
-	@TableField(value = "update_time",fill = FieldFill.INSERT_UPDATE)
-	@ApiModelProperty(value = "更新时间")
+	@TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
 	private Date updateTime;
 
 	/**
 	 * 更新人
 	 */
 	@TableField(value = "update_user")
-	@ApiModelProperty(value = "更新人")
 	private Long updateUser;
 
 	/**
 	 * 乐观锁
 	 */
 	@TableField(value = "version")
-	@ApiModelProperty(value = "乐观锁")
 	private Long version;
 
 	/**
 	 * 删除标记
 	 */
 	@TableField(value = "deleted")
-	@ApiModelProperty(value = "删除标记")
 	private Byte deleted;
 
 	private static final long serialVersionUID = 1L;

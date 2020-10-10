@@ -10,10 +10,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.Version;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(value = "com-github-quick-spring-boot-manage-dao-entity-ManagerUserExtends")
 @TableName(value = "manager_user_extends")
 public class ManagerUserExtends implements Serializable {
 	public static final String COL_ID = "id";
@@ -37,49 +34,42 @@ public class ManagerUserExtends implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@TableId(value = "id", type = IdType.INPUT)
-	@ApiModelProperty(value = "")
 	private Long id;
 
 	/**
 	 * 管理端用户id
 	 */
 	@TableField(value = "user_id")
-	@ApiModelProperty(value = "管理端用户id")
 	private Long userId;
 
 	/**
 	 * 邮件
 	 */
 	@TableField(value = "mail")
-	@ApiModelProperty(value = "邮件")
 	private String mail;
 
 	/**
 	 * 创建时间
 	 */
 	@TableField(value = "create_time", fill = FieldFill.INSERT)
-	@ApiModelProperty(value = "创建时间")
 	private Date createTime;
 
 	/**
 	 * 创建人
 	 */
 	@TableField(value = "create_user")
-	@ApiModelProperty(value = "创建人")
 	private Long createUser;
 
 	/**
 	 * 更新时间
 	 */
 	@TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
-	@ApiModelProperty(value = "更新时间")
 	private Date updateTime;
 
 	/**
 	 * 更新人
 	 */
 	@TableField(value = "update_user")
-	@ApiModelProperty(value = "更新人")
 	private Long updateUser;
 
 	/**
@@ -87,7 +77,6 @@ public class ManagerUserExtends implements Serializable {
 	 */
 	@TableField(value = "version")
 	@Version
-	@ApiModelProperty(value = "乐观锁")
 	private Long version;
 
 	/**
@@ -95,7 +84,6 @@ public class ManagerUserExtends implements Serializable {
 	 */
 	@TableField(value = "deleted")
 	@TableLogic
-	@ApiModelProperty(value = "删除标记")
 	private Byte deleted;
 
 	/**

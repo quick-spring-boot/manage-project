@@ -22,31 +22,25 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 角色和权限关系表
  */
-@ApiModel(value = "com-github-quick-spring-boot-manage-dao-entity-MiddleRolePermission")
 @TableName(value = "middle_role_permission")
 public class MiddleRolePermission implements Serializable {
 	@TableId(value = "id", type = IdType.AUTO)
-	@ApiModelProperty(value = "")
 	private Long id;
 
 	/**
 	 * 角色id
 	 */
 	@TableField(value = "role_id")
-	@ApiModelProperty(value = "角色id")
 	private Long roleId;
 
 	/**
 	 * 权限id
 	 */
 	@TableField(value = "permission_id")
-	@ApiModelProperty(value = "权限id")
 	private Long permissionId;
 
 	private static final long serialVersionUID = 1L;

@@ -24,77 +24,12 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 部门表
  */
-@ApiModel(value = "com-github-quick-spring-boot-manage-dao-entity-ManagerDepartment")
 @TableName(value = "manager_department")
 public class ManagerDepartment implements Serializable {
-	@TableId(value = "id", type = IdType.AUTO)
-	@ApiModelProperty(value = "")
-	private Long id;
-
-	/**
-	 * 父级部门id
-	 */
-	@TableField(value = "pid")
-	@ApiModelProperty(value = "父级部门id")
-	private Long pid;
-
-	/**
-	 * 部门名称
-	 */
-	@TableField(value = "`name`")
-	@ApiModelProperty(value = "部门名称")
-	private String name;
-
-	/**
-	 * 创建时间
-	 */
-	@TableField(value = "create_time",fill = FieldFill.INSERT)
-	@ApiModelProperty(value = "创建时间")
-	private Date createTime;
-
-	/**
-	 * 创建人
-	 */
-	@TableField(value = "create_user")
-	@ApiModelProperty(value = "创建人")
-	private Long createUser;
-
-	/**
-	 * 更新时间
-	 */
-	@TableField(value = "update_time",fill = FieldFill.INSERT_UPDATE)
-	@ApiModelProperty(value = "更新时间")
-	private Date updateTime;
-
-	/**
-	 * 更新人
-	 */
-	@TableField(value = "update_user")
-	@ApiModelProperty(value = "更新人")
-	private Long updateUser;
-
-	/**
-	 * 乐观锁
-	 */
-	@TableField(value = "version")
-	@ApiModelProperty(value = "乐观锁")
-	private Long version;
-
-	/**
-	 * 删除标记
-	 */
-	@TableField(value = "deleted")
-	@ApiModelProperty(value = "删除标记")
-	private Byte deleted;
-
-	private static final long serialVersionUID = 1L;
-
 	public static final String COL_ID = "id";
 
 	public static final String COL_PID = "pid";
@@ -112,6 +47,59 @@ public class ManagerDepartment implements Serializable {
 	public static final String COL_VERSION = "version";
 
 	public static final String COL_DELETED = "deleted";
+
+	private static final long serialVersionUID = 1L;
+
+	@TableId(value = "id", type = IdType.AUTO)
+	private Long id;
+
+	/**
+	 * 父级部门id
+	 */
+	@TableField(value = "pid")
+	private Long pid;
+
+	/**
+	 * 部门名称
+	 */
+	@TableField(value = "`name`")
+	private String name;
+
+	/**
+	 * 创建时间
+	 */
+	@TableField(value = "create_time", fill = FieldFill.INSERT)
+	private Date createTime;
+
+	/**
+	 * 创建人
+	 */
+	@TableField(value = "create_user")
+	private Long createUser;
+
+	/**
+	 * 更新时间
+	 */
+	@TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+	private Date updateTime;
+
+	/**
+	 * 更新人
+	 */
+	@TableField(value = "update_user")
+	private Long updateUser;
+
+	/**
+	 * 乐观锁
+	 */
+	@TableField(value = "version")
+	private Long version;
+
+	/**
+	 * 删除标记
+	 */
+	@TableField(value = "deleted")
+	private Byte deleted;
 
 	/**
 	 * @return id

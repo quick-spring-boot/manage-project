@@ -19,9 +19,6 @@ package com.github.quick.spring.boot.manage.rest.controller.user.bind;
 import com.github.quick.spring.boot.manage.model.vo.ResultVo;
 import com.github.quick.spring.boot.manage.rest.response.OkResponse;
 import com.github.quick.spring.boot.manage.service.user.ManagerUserBizService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -32,7 +29,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Api("用户绑定相关接口")
 @RequestMapping("/user/bind")
 public class UserBindController {
 
@@ -40,19 +36,18 @@ public class UserBindController {
 	@Qualifier("managerUserBizServiceImpl")
 	private ManagerUserBizService managerUserBizService;
 
-	@ApiOperation(value = "用户绑定部门接口")
 	@PostMapping("/department/{user_id}/{dept_id}")
 	public ResultVo<Boolean> bindDepartment(
-			@ApiParam(value = "用户id") @PathVariable(value = "user_id") Long userId,
-			@ApiParam(value = "部门id") @PathVariable(value = "dept_id") Long deptId
+			 @PathVariable(value = "user_id") Long userId,
+			 @PathVariable(value = "dept_id") Long deptId
 	) {
 		return OkResponse.SAVE_SUCCESS.ret(managerUserBizService.bindDepartment(userId, deptId));
 	}
 
 	@DeleteMapping("un/department/{user_id}/{dept_id}")
 	public ResultVo<Boolean> unBindDepartment(
-			@ApiParam(value = "用户id") @PathVariable(value = "user_id") Long userId,
-			@ApiParam(value = "部门id") @PathVariable(value = "dept_id") Long deptId
+ @PathVariable(value = "user_id") Long userId,
+		 @PathVariable(value = "dept_id") Long deptId
 	) {
 		return OkResponse.SAVE_SUCCESS.ret(managerUserBizService.unBindDepartment(userId, deptId));
 	}

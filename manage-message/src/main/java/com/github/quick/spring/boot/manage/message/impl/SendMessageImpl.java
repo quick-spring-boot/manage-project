@@ -20,10 +20,20 @@ import java.util.List;
 
 import com.github.quick.spring.boot.manage.message.api.SendMessage;
 import com.github.quick.spring.boot.manage.model.dto.ManagerUserDevice;
+import org.apache.dubbo.config.annotation.DubboService;
+import org.apache.dubbo.config.annotation.Service;
+import org.apache.dubbo.rpc.RpcContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+@Service(version = "1.0.0")
 public class SendMessageImpl implements SendMessage {
+	private static final Logger log = LoggerFactory.getLogger(SendMessageImpl.class);
+
 	@Override
 	public void sendMail(String message, ManagerUserDevice managerUserDevice) {
+		log.info("{}", RpcContext.getContext().getRemoteAddress());
+
 		System.out.println("发送消息");
 	}
 

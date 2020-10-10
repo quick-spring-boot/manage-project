@@ -1,5 +1,8 @@
 package com.github.quick.spring.boot.manage.dao.entity;
 
+import java.io.Serializable;
+import java.util.Date;
+
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -7,16 +10,10 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.Version;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
-import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 权限表
  */
-@ApiModel(value = "com-github-quick-spring-boot-manage-dao-entity-ManagerPermission")
 @TableName(value = "manager_permission")
 public class ManagerPermission implements Serializable {
 	public static final String COL_CODE = "code";
@@ -48,56 +45,48 @@ public class ManagerPermission implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@TableId(value = "id", type = IdType.AUTO)
-	@ApiModelProperty(value = "")
 	private Long id;
 
 	/**
 	 * 1. 菜单，2. 按钮，3. url
 	 */
 	@TableField(value = "`type`")
-	@ApiModelProperty(value = "1. 菜单，2. 按钮，3. url")
 	private Byte type;
 
 	/**
 	 * 外联id
 	 */
 	@TableField(value = "ref_id")
-	@ApiModelProperty(value = "外联id")
 	private Long refId;
 
 	/**
 	 * 0无效，1有效
 	 */
 	@TableField(value = "`status`")
-	@ApiModelProperty(value = "0无效，1有效")
 	private Byte status;
 
 	/**
 	 * 创建时间
 	 */
 	@TableField(value = "create_time", fill = FieldFill.INSERT)
-	@ApiModelProperty(value = "创建时间")
 	private Date createTime;
 
 	/**
 	 * 创建人
 	 */
 	@TableField(value = "create_user")
-	@ApiModelProperty(value = "创建人")
 	private Long createUser;
 
 	/**
 	 * 更新时间
 	 */
 	@TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
-	@ApiModelProperty(value = "更新时间")
 	private Date updateTime;
 
 	/**
 	 * 更新人
 	 */
 	@TableField(value = "update_user")
-	@ApiModelProperty(value = "更新人")
 	private Long updateUser;
 
 	/**
@@ -105,7 +94,6 @@ public class ManagerPermission implements Serializable {
 	 */
 	@Version
 	@TableField(value = "version")
-	@ApiModelProperty(value = "乐观锁")
 	private Long version;
 
 	/**
@@ -113,14 +101,12 @@ public class ManagerPermission implements Serializable {
 	 */
 	@TableLogic
 	@TableField(value = "deleted")
-	@ApiModelProperty(value = "删除标记")
 	private Byte deleted;
 
 	/**
 	 * 外联表
 	 */
 	@TableField(value = "ref_table")
-	@ApiModelProperty(value = "外联表")
 	private String refTable;
 
 	/**

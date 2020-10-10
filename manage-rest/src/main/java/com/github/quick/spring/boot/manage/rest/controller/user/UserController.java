@@ -23,8 +23,6 @@ import com.github.quick.spring.boot.manage.model.res.TokenCollection;
 import com.github.quick.spring.boot.manage.model.vo.ResultVo;
 import com.github.quick.spring.boot.manage.rest.response.OkResponse;
 import com.github.quick.spring.boot.manage.service.user.ManagerUserBizService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,26 +49,28 @@ public class UserController {
 		this.managerUserBizService = managerUserBizService;
 	}
 
-	@ApiOperation(value = "创建用户")
+	/**
+	 * 创建用户
+	 * @param userCreateParam 创建用户参数
+	 * @return true: 成功, false: 失败
+	 */
 	@PostMapping("/")
 	public ResultVo<Boolean> createUser(
-			@ApiParam(value = "创建用户的参数") @RequestBody ManagerUserCreateParam userCreateParam
+			@RequestBody ManagerUserCreateParam userCreateParam
 	) {
 		return OkResponse.SAVE_SUCCESS.ret(managerUserBizService.createManagerUser(userCreateParam));
 	}
 
-	@ApiOperation(value = "修改用户信息")
 	@PutMapping("/{user_id}")
 	public ResultVo<Boolean> updateUser(
-			@ApiParam(value = "用户id") @PathVariable(value = "user_id") Long userId,
-			@ApiParam(value = "创建用户的参数") @RequestBody ManagerUserCreateParam userCreateParam
+			@PathVariable(value = "user_id") Long userId,
+			@RequestBody ManagerUserCreateParam userCreateParam
 
 	) {
 		return OkResponse.UPDATE_SUCCESS.ret(managerUserBizService.updateUser(userId, userCreateParam));
 	}
 
 
-	@ApiOperation(value = "查询用户列表")
 	@GetMapping("/query")
 	public ResultVo<Object> query(
 			PageParam pageParam
@@ -78,37 +78,33 @@ public class UserController {
 		return OkResponse.QUERY_SUCCESS.ret(managerUserBizService.query(pageParam));
 	}
 
-	@ApiOperation(value = "根据ID查询用户详情")
 	@GetMapping("/{user_id}")
 	public ResultVo<Object> byId(
-			@ApiParam(value = "用户id") @PathVariable(value = "user_id") Long userId
+			@PathVariable(value = "user_id") Long userId
 	) {
 		return OkResponse.QUERY_SUCCESS.ret(managerUserBizService.byId(userId));
 	}
 
 
-	@ApiOperation(value = "生成token")
 	@PostMapping("/token/{user_id}")
 	public ResultVo<TokenCollection> generatorToken(
-			@ApiParam(value = "用户id") @PathVariable(value = "user_id") Long userId
+			@PathVariable(value = "user_id") Long userId
 	) {
 		return OkResponse.GENERATOR_TOKEN_SUCCESS.ret(managerUserBizService.generatorToken(userId));
 	}
 
 
-	@ApiOperation(value = "刷新token")
 	@PutMapping("/token/refresh/{refresh_token}")
 	public ResultVo<TokenCollection> generatorToken(
-			@ApiParam(value = "刷新用token") @PathVariable(value = "refresh_token") String refreshToken
+			@PathVariable(value = "refresh_token") String refreshToken
 	) {
 		return OkResponse.GENERATOR_TOKEN_SUCCESS.ret(managerUserBizService.refreshToken(refreshToken));
 	}
 
 
-	@ApiOperation(value = "通过token获取用户信息")
 	@GetMapping("/token/{access_token}")
 	public ResultVo<ManagerUserResponse> findUserByToken(
-			@ApiParam(value = "access_token") @PathVariable(value = "access_token") String accessToken
+			@PathVariable(value = "access_token") String accessToken
 	) {
 		return OkResponse.QUERY_SUCCESS.ret(managerUserBizService.findUserByToken(accessToken));
 	}

@@ -19,7 +19,6 @@ package com.github.quick.spring.boot.manage.rest.controller.role.bind;
 import com.github.quick.spring.boot.manage.model.vo.ResultVo;
 import com.github.quick.spring.boot.manage.rest.response.OkResponse;
 import com.github.quick.spring.boot.manage.service.role.RoleBindService;
-import io.swagger.annotations.ApiParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,16 +37,16 @@ public class RoleBindController {
 
 	@PostMapping("/department/{role_id}/{dept_id}")
 	public ResultVo<Boolean> bindDepartment(
-			@ApiParam(value = "角色id") @PathVariable(value = "role_id") Long roleId,
-			@ApiParam(value = "部门id") @PathVariable(value = "dept_id") Long deptId
+			@PathVariable(value = "role_id") Long roleId,
+			@PathVariable(value = "dept_id") Long deptId
 	) {
 		return OkResponse.SAVE_SUCCESS.ret(roleBindService.bindDepartment(roleId, deptId));
 	}
 
 	@DeleteMapping("un/department/{role_id}/{dept_id}")
 	public ResultVo<Boolean> unBindDepartment(
-			@ApiParam(value = "角色id") @PathVariable(value = "role_id") Long roleId,
-			@ApiParam(value = "部门id") @PathVariable(value = "dept_id") Long deptId
+			@PathVariable(value = "role_id") Long roleId,
+			@PathVariable(value = "dept_id") Long deptId
 	) {
 		return OkResponse.SAVE_SUCCESS.ret(roleBindService.unBindDepartment(roleId, deptId));
 	}
@@ -55,16 +54,16 @@ public class RoleBindController {
 
 	@PostMapping("/permission/{role_id}/{permission_id}")
 	public ResultVo<Boolean> bindPermission(
-			@ApiParam(value = "角色id") @PathVariable(value = "role_id") Long roleId,
-			@ApiParam(value = "权限id") @PathVariable(value = "permission_id") Long permissionId
+			@PathVariable(value = "role_id") Long roleId,
+			@PathVariable(value = "permission_id") Long permissionId
 	) {
 		return OkResponse.SAVE_SUCCESS.ret(roleBindService.bindPermission(roleId, permissionId));
 	}
 
 	@DeleteMapping("un/department/{role_id}/{permission_id}")
 	public ResultVo<Boolean> unBindPermission(
-			@ApiParam(value = "角色id") @PathVariable(value = "role_id") Long roleId,
-			@ApiParam(value = "权限id") @PathVariable(value = "permission_id") Long permissionId
+			 @PathVariable(value = "role_id") Long roleId,
+			 @PathVariable(value = "permission_id") Long permissionId
 	) {
 		return OkResponse.SAVE_SUCCESS.ret(roleBindService.unBindPermission(roleId, permissionId));
 	}

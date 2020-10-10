@@ -10,13 +10,10 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.Version;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 商户材料,商户审核的拓展表
  */
-@ApiModel(value = "com-github-quick-spring-boot-manage-dao-entity-ShopMaterial")
 @TableName(value = "shop_material")
 public class ShopMaterial implements Serializable {
 	public static final String COL_ID = "id";
@@ -40,49 +37,42 @@ public class ShopMaterial implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@TableId(value = "id", type = IdType.AUTO)
-	@ApiModelProperty(value = "")
 	private Long id;
 
 	/**
 	 * 商户审核表id
 	 */
 	@TableField(value = "shop_audit_id")
-	@ApiModelProperty(value = "商户审核表id")
 	private Long shopAuditId;
 
 	/**
 	 * 食品许可证
 	 */
 	@TableField(value = "food_license")
-	@ApiModelProperty(value = "食品许可证")
 	private String foodLicense;
 
 	/**
 	 * 创建时间
 	 */
 	@TableField(value = "create_time", fill = FieldFill.INSERT)
-	@ApiModelProperty(value = "创建时间")
 	private Date createTime;
 
 	/**
 	 * 创建人
 	 */
 	@TableField(value = "create_user")
-	@ApiModelProperty(value = "创建人")
 	private Long createUser;
 
 	/**
 	 * 更新时间
 	 */
 	@TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
-	@ApiModelProperty(value = "更新时间")
 	private Date updateTime;
 
 	/**
 	 * 更新人
 	 */
 	@TableField(value = "update_user")
-	@ApiModelProperty(value = "更新人")
 	private Long updateUser;
 
 	/**
@@ -90,7 +80,6 @@ public class ShopMaterial implements Serializable {
 	 */
 	@TableField(value = "version")
 	@Version
-	@ApiModelProperty(value = "乐观锁")
 	private Long version;
 
 	/**
@@ -98,7 +87,6 @@ public class ShopMaterial implements Serializable {
 	 */
 	@TableField(value = "deleted")
 	@TableLogic
-	@ApiModelProperty(value = "删除标记")
 	private Byte deleted;
 
 	/**

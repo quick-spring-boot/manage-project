@@ -26,73 +26,61 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.Version;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 
 /**
  * api表
  */
-@ApiModel(value = "com-github-quick-spring-boot-manage-dao-entity-ManagerApi")
 @TableName(value = "manager_api")
 public class ManagerApi implements Serializable {
 	@TableId(value = "id", type = IdType.AUTO)
-	@ApiModelProperty(value = "")
 	private Long id;
 
 	/**
 	 * url名称
 	 */
 	@TableField(value = "`name`")
-	@ApiModelProperty(value = "url名称")
 	private String name;
 
 	/**
 	 * code
 	 */
 	@TableField(value = "code")
-	@ApiModelProperty(value = "code")
 	private String code;
 
 	/**
 	 * url值
 	 */
 	@TableField(value = "val")
-	@ApiModelProperty(value = "url值")
 	private String val;
 
 	/**
 	 * 0无效，1有效
 	 */
 	@TableField(value = "`status`")
-	@ApiModelProperty(value = "0无效，1有效")
 	private Byte status;
 
 	/**
 	 * 创建时间
 	 */
 	@TableField(value = "create_time", fill = FieldFill.INSERT)
-	@ApiModelProperty(value = "创建时间")
 	private Date createTime;
 
 	/**
 	 * 创建人
 	 */
 	@TableField(value = "create_user")
-	@ApiModelProperty(value = "创建人")
 	private Long createUser;
 
 	/**
 	 * 更新时间
 	 */
 	@TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
-	@ApiModelProperty(value = "更新时间")
 	private Date updateTime;
 
 	/**
 	 * 更新人
 	 */
 	@TableField(value = "update_user")
-	@ApiModelProperty(value = "更新人")
 	private Long updateUser;
 
 	/**
@@ -100,7 +88,6 @@ public class ManagerApi implements Serializable {
 	 */
 	@TableField(value = "version")
 	@Version
-	@ApiModelProperty(value = "乐观锁")
 	private Long version;
 
 	/**
@@ -108,7 +95,6 @@ public class ManagerApi implements Serializable {
 	 */
 	@TableField(value = "deleted")
 	@TableLogic
-	@ApiModelProperty(value = "删除标记")
 	private Byte deleted;
 
 	private static final long serialVersionUID = 1L;

@@ -26,59 +26,49 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.Version;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 用户表
  */
-@ApiModel(value = "com-github-quick-spring-boot-manage-dao-entity-ManagerUser")
 @TableName(value = "manager_user")
 public class ManagerUser implements Serializable {
 	@TableId(value = "id", type = IdType.AUTO)
-	@ApiModelProperty(value = "")
 	private Long id;
 
 	/**
 	 * 登陆账号
 	 */
 	@TableField(value = "username")
-	@ApiModelProperty(value = "登陆账号")
 	private String username;
 
 	/**
 	 * 密码
 	 */
 	@TableField(value = "`password`")
-	@ApiModelProperty(value = "密码")
 	private String password;
 
 	/**
 	 * 创建时间
 	 */
 	@TableField(value = "create_time", fill = FieldFill.INSERT)
-	@ApiModelProperty(value = "创建时间")
 	private Date createTime;
 
 	/**
 	 * 创建人
 	 */
 	@TableField(value = "create_user")
-	@ApiModelProperty(value = "创建人")
 	private Long createUser;
 
 	/**
 	 * 更新时间
 	 */
 	@TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
-	@ApiModelProperty(value = "更新时间")
 	private Date updateTime;
 
 	/**
 	 * 更新人
 	 */
 	@TableField(value = "update_user")
-	@ApiModelProperty(value = "更新人")
 	private Long updateUser;
 
 	/**
@@ -86,7 +76,6 @@ public class ManagerUser implements Serializable {
 	 */
 	@TableField(value = "version")
 	@Version
-	@ApiModelProperty(value = "乐观锁")
 	private Long version;
 
 	/**
@@ -94,7 +83,6 @@ public class ManagerUser implements Serializable {
 	 */
 	@TableField(value = "deleted")
 	@TableLogic
-	@ApiModelProperty(value = "删除标记")
 	private Byte deleted;
 
 	private static final long serialVersionUID = 1L;

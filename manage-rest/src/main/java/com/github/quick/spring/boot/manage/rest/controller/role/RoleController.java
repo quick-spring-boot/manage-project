@@ -22,9 +22,6 @@ import com.github.quick.spring.boot.manage.model.req.role.QueryRoleParam;
 import com.github.quick.spring.boot.manage.model.vo.ResultVo;
 import com.github.quick.spring.boot.manage.rest.response.OkResponse;
 import com.github.quick.spring.boot.manage.service.role.RoleService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,7 +32,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api("角色相关接口")
 @RestController
 @RequestMapping("/role")
 public class RoleController {
@@ -46,7 +42,6 @@ public class RoleController {
 		this.roleService = roleService;
 	}
 
-	@ApiOperation(value = "创建角色")
 	@PostMapping("/")
 	public ResultVo<Boolean> create(
 			@RequestBody CreateRoleParam param
@@ -55,10 +50,9 @@ public class RoleController {
 		return OkResponse.SAVE_SUCCESS.ret(roleService.create(param));
 	}
 
-	@ApiOperation(value = "修改角色信息")
 	@PutMapping("/{role_id}")
 	public ResultVo<Boolean> update(
-			@ApiParam(value = "角色id") @PathVariable(value = "role_id") Long roleId,
+		 @PathVariable(value = "role_id") Long roleId,
 			@RequestBody CreateRoleParam param
 
 	) {
@@ -66,7 +60,6 @@ public class RoleController {
 	}
 
 
-	@ApiOperation(value = "查询角色列表")
 	@GetMapping("/query")
 	public ResultVo<Object> query(
 			QueryRoleParam param,
@@ -75,10 +68,9 @@ public class RoleController {
 		return OkResponse.QUERY_SUCCESS.ret(roleService.query(param,pageParam));
 	}
 
-	@ApiOperation(value = "根据ID查询角色详情")
 	@GetMapping("/{role_id}")
 	public ResultVo<Object> byId(
-			@ApiParam(value = "角色id") @PathVariable(value = "role_id") Long roleId
+			 @PathVariable(value = "role_id") Long roleId
 	) {
 		return OkResponse.QUERY_SUCCESS.ret(roleService.byId(roleId));
 	}

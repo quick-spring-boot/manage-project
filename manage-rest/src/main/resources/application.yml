@@ -66,3 +66,8 @@ pagehelper:
   params: count=countSql
   reasonable: true
   supportMethodsArguments: true
+
+
+dubbo:
+  registry:
+    address: nacos://localhost:8848

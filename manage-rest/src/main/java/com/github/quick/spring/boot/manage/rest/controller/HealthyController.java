@@ -23,16 +23,24 @@ import java.util.Map;
 
 import com.github.quick.spring.boot.manage.model.vo.ResultVo;
 import com.github.quick.spring.boot.manage.rest.response.OkResponse;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-
+import com.github.quick.spring.boot.manage.service.DemoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Api("健康检查接口")
 public class HealthyController {
-	@ApiOperation(value = "ping接口")
+
+
+
+	@Autowired
+	private DemoService demoService;
+
+
+	/**
+	 * ping接口
+	 * @return pong
+	 */
 	@GetMapping("/ping")
 	public ResultVo<String> ping() {
 		return OkResponse.HEALTHY_SUCCESS.ret("pong");

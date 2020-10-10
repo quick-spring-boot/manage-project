@@ -14,17 +14,23 @@
  * limitations under the License.
  */
 
-package com.github.quick.spring.boot.manage.rest;
+package com.github.quick.spring.boot.manage.service.factory.convert.impl;
 
+import com.github.quick.spring.boot.manage.rest.ManageRestApp;
+import com.github.quick.spring.boot.manage.service.DemoService;
+import org.junit.jupiter.api.Test;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootApplication(scanBasePackages = "com.github.quick.spring.boot.manage.*")
-public class ManageRestApp {
+@SpringBootTest(classes = {ManageRestApp.class})
+public class DemoServiceTest {
+	@Autowired
+	private DemoService demoService;
 
+	@Test
+	public void tt() {
+		demoService.setSendMessage();
 
-	public static void main(String[] args) {
-		SpringApplication.run(ManageRestApp.class, args);
 	}
 }

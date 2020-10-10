@@ -14,32 +14,24 @@
  * limitations under the License.
  */
 
-package com.github.quick.spring.boot.manage.service;
 
-import com.github.quick.spring.boot.manage.message.api.SendMessage;
-import com.github.quick.spring.boot.manage.model.dto.ManagerUserDevice;
-import org.apache.dubbo.config.annotation.Reference;
+package com.github.quick.spring.boot.manage.message;
 
-import org.springframework.boot.ApplicationRunner;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Service;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 
 @EnableAutoConfiguration
-@Service
-public class DemoService {
-	@Reference(version = "1.0.0")
-	private SendMessage sendMessage;
+public class ManageMessageApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoService.class).close();
+		try {
+
+			SpringApplicationBuilder springApplicationBuilder = new SpringApplicationBuilder(ManageMessageApp.class);
+			springApplicationBuilder.run(args);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
-
-	public void setSendMessage() {
-		ManagerUserDevice managerUserDevice = new ManagerUserDevice();
-		sendMessage.sendMail("data", managerUserDevice);
-	}
-
-
 }

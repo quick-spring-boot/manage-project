@@ -16,19 +16,20 @@
 
 package com.github.quick.spring.boot.manage.model.req.user;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 创建系统管理用户的参数
  */
-@ApiModel(value = "创建管理端用户的请求参数")
 public class ManagerUserCreateParam {
 
-	@ApiModelProperty(value = "用户名称")
+	/**
+	 * 用户名称
+	 */
 	private String username;
 
-	@ApiModelProperty(value = "密码")
+	/**
+	 * 密码
+	 */
 	private String password;
 
 	public String getUsername() {
