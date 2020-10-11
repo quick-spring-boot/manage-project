@@ -21,11 +21,11 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.github.quick.spring.boot.manage.message.api.api.SendMessage;
+import com.github.quick.spring.boot.manage.message.api.SendMessage;
 import com.github.quick.spring.boot.manage.model.dto.ManagerUserDevice;
 import com.github.quick.spring.boot.manage.model.vo.ResultVo;
 import com.github.quick.spring.boot.manage.rest.response.OkResponse;
-import com.github.quick.spring.boot.manage.service.DemoService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,8 +43,9 @@ public class HealthyController {
 	@GetMapping("/ping")
 	public ResultVo<String> ping() {
 		ManagerUserDevice managerUserDevice = new ManagerUserDevice();
-		managerUserDevice.setMail("aaaaaaaaaaa");
-		sendMessage.sendMailForDevice(managerUserDevice);
+		sendMessage.dom();
+//		managerUserDevice.setMail("aaaaaaaaaaa");
+//		sendMessage.sendMailForDevice(managerUserDevice);
 
 		return OkResponse.HEALTHY_SUCCESS.ret("pong");
 	}

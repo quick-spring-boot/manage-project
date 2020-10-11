@@ -16,25 +16,24 @@
 
 package com.github.quick.spring.boot.manage.message.api.impl;
 
-import java.util.List;
-
+import com.github.quick.spring.boot.manage.message.api.SendMessage;
 import com.github.quick.spring.boot.manage.model.dto.ManagerUserDevice;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SendMessageImpl {
+@DubboService(version = "1")
+public class SendMessageImpl implements SendMessage {
 	private static final Logger log = LoggerFactory.getLogger(SendMessageImpl.class);
 
-	public void sendMail(String message, ManagerUserDevice managerUserDevice) {
-
-		System.out.println("发送消息");
+	@Override
+	public void sendMailForDevice(ManagerUserDevice managerUserDevice) {
+		System.out.println("111111111");
 	}
 
-	public void sendMail(String message, String mail) {
-		System.out.println("发送消息");
-	}
+	@Override
+	public void dom() {
+		System.out.println("111111111");
 
-	public void sendMail(String message, List<String> mails) {
-		System.out.println("发送消息");
 	}
 }

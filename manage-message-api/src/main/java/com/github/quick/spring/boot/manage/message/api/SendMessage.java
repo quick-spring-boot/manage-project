@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package com.github.quick.spring.boot.manage.message.api.api;
+package com.github.quick.spring.boot.manage.message.api;
 
 import com.github.quick.spring.boot.manage.model.dto.ManagerUserDevice;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -29,4 +30,7 @@ public interface SendMessage {
 	void sendMailForDevice(
 			@RequestBody ManagerUserDevice managerUserDevice);
 
+
+	@GetMapping("/do")
+	void dom();
 }

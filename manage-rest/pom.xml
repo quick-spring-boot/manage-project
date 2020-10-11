@@ -79,23 +79,20 @@
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/com.alibaba.boot/nacos-discovery-spring-boot-starter -->
+
+
 		<dependency>
-			<groupId>com.alibaba.boot</groupId>
-			<artifactId>nacos-discovery-spring-boot-starter</artifactId>
-			<version>0.2.7</version>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>com.alibaba.cloud</groupId>
-			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-			<version>${spring-cloud-alibaba.version}</version>
+			<artifactId>spring-cloud-starter-dubbo</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.alibaba.cloud</groupId>
-			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-			<version>${spring-cloud-alibaba.version}</version>
-		</dependency>
+
+
+
 	</dependencies>
 
 

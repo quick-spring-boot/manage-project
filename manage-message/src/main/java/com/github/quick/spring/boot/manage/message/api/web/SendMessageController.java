@@ -28,8 +28,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping
 public class SendMessageController {
 	@PostMapping("/send")
-	public void send( @RequestBody ManagerUserDevice managerUserDevice) {
+	public void send(@RequestBody ManagerUserDevice managerUserDevice) {
 		System.out.println();
 	}
 
+	@GetMapping("/do")
+	public void mo(){
+		System.out.println();
+	}
 }

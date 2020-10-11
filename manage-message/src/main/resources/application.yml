@@ -9,6 +9,12 @@ spring:
         username: nacos
         password: nacos
 
-feign:
-  httpclient:
-    enabled: true
+dubbo:
+  protocol:
+    name: dubbo
+    port: 12344
+
+  registry:
+    address: nacos://127.0.0.1:8848
+  scan:
+    base-packages: com.github.quick.spring.boot.manage.message.api
