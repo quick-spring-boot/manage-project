@@ -21,6 +21,8 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.github.quick.spring.boot.manage.message.api.api.SendMessage;
+import com.github.quick.spring.boot.manage.model.dto.ManagerUserDevice;
 import com.github.quick.spring.boot.manage.model.vo.ResultVo;
 import com.github.quick.spring.boot.manage.rest.response.OkResponse;
 import com.github.quick.spring.boot.manage.service.DemoService;
@@ -33,9 +35,6 @@ public class HealthyController {
 
 
 
-	@Autowired
-	private DemoService demoService;
-
 
 	/**
 	 * ping接口
@@ -43,9 +42,15 @@ public class HealthyController {
 	 */
 	@GetMapping("/ping")
 	public ResultVo<String> ping() {
+		ManagerUserDevice managerUserDevice = new ManagerUserDevice();
+		managerUserDevice.setMail("aaaaaaaaaaa");
+		sendMessage.sendMailForDevice(managerUserDevice);
+
 		return OkResponse.HEALTHY_SUCCESS.ret("pong");
 	}
 
+	@Autowired
+	private SendMessage sendMessage;
 
 	@GetMapping("/demo")
 	public ResultVo<Map<String, Object>> demo() {

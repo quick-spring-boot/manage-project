@@ -16,37 +16,8 @@
 
 package com.github.quick.spring.boot.manage.service;
 
-import com.github.quick.spring.boot.manage.message.api.SendMessage;
-import com.github.quick.spring.boot.manage.model.dto.ManagerUserDevice;
-import org.apache.dubbo.config.annotation.Reference;
-
-import org.springframework.boot.ApplicationRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
-@EnableAutoConfiguration
-@Service
 public class DemoService {
-	@Reference(version = "1.0.0")
-	private SendMessage sendMessage;
-
-	public static void main(String[] args) {
-		SpringApplication.run(DemoService.class).close();
-	}
-
-	public void setSendMessage() {
-		ManagerUserDevice managerUserDevice = new ManagerUserDevice();
-		sendMessage.sendMail("data", managerUserDevice);
-	}
-
-//	@Bean
-//	public ApplicationRunner runner() {
-//		return args -> {
-//			this.setSendMessage();
-//
-//		};
-//	}
 
 }

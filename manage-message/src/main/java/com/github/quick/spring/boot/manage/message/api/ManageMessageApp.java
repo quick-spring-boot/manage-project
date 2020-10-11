@@ -15,23 +15,17 @@
  */
 
 
-package com.github.quick.spring.boot.manage.message;
+package com.github.quick.spring.boot.manage.message.api;
 
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
-@EnableAutoConfiguration
+@SpringBootApplication
+@EnableDiscoveryClient
 public class ManageMessageApp {
 
 	public static void main(String[] args) {
-		try {
-
-			SpringApplicationBuilder springApplicationBuilder = new SpringApplicationBuilder(ManageMessageApp.class);
-			springApplicationBuilder.run(args);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		SpringApplication.run(ManageMessageApp.class, args);
 	}
 }

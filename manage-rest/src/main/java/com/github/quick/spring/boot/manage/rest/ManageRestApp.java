@@ -17,18 +17,19 @@
 package com.github.quick.spring.boot.manage.rest;
 
 
-import com.alibaba.nacos.spring.context.annotation.discovery.EnableNacosDiscovery;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication(scanBasePackages = "com.github.quick.spring.boot.manage.*")
 @EnableDiscoveryClient
+@EnableFeignClients(basePackages = "com.github.quick.spring.boot.manage.message.api.api")
 public class ManageRestApp {
 
-
 	public static void main(String[] args) {
+
 		SpringApplication.run(ManageRestApp.class, args);
 	}
+
 }

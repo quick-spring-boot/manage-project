@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: manage-message
+  cloud:
+    nacos:
+      discovery:
+        ip: localhost
+        port: 8848
+        username: nacos
+        password: nacos
+
+feign:
+  httpclient:
+    enabled: true

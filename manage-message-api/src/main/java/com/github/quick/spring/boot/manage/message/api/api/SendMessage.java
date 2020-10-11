@@ -14,42 +14,19 @@
  * limitations under the License.
  */
 
-package com.github.quick.spring.boot.manage.model.dto;
+package com.github.quick.spring.boot.manage.message.api.api;
 
-/**
- * 用户设备
- */
-public class ManagerUserDevice {
-	private Long userId;
+import com.github.quick.spring.boot.manage.model.dto.ManagerUserDevice;
 
-	public Long getUserId() {
-		return userId;
-	}
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
+@FeignClient("manage-message")
+public interface SendMessage {
 
-	/**
-	 * 邮件
-	 */
-	private String mail;
+	@PostMapping(value = "send")
+	void sendMailForDevice(
+			@RequestBody ManagerUserDevice managerUserDevice);
 
-	private String message;
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-	public String getMail() {
-		return mail;
-	}
-
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
 }

@@ -30,7 +30,6 @@ public class DemoServiceTest {
 
 	@Test
 	public void tt() {
-		demoService.setSendMessage();
 
 	}
 }

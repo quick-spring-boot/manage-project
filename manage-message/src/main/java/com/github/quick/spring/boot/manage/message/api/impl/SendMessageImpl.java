@@ -14,17 +14,27 @@
  * limitations under the License.
  */
 
-package com.github.quick.spring.boot.manage.message.api;
+package com.github.quick.spring.boot.manage.message.api.impl;
 
 import java.util.List;
 
 import com.github.quick.spring.boot.manage.model.dto.ManagerUserDevice;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public interface SendMessage {
+public class SendMessageImpl {
+	private static final Logger log = LoggerFactory.getLogger(SendMessageImpl.class);
 
-	void sendMail(String message, ManagerUserDevice managerUserDevice);
+	public void sendMail(String message, ManagerUserDevice managerUserDevice) {
 
-	void sendMail(String message, String mail);
+		System.out.println("发送消息");
+	}
 
-	void sendMail(String message, List<String> mails);
+	public void sendMail(String message, String mail) {
+		System.out.println("发送消息");
+	}
+
+	public void sendMail(String message, List<String> mails) {
+		System.out.println("发送消息");
+	}
 }
