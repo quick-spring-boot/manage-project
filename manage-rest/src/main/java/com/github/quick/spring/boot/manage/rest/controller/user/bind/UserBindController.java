@@ -38,16 +38,16 @@ public class UserBindController {
 
 	@PostMapping("/department/{user_id}/{dept_id}")
 	public ResultVo<Boolean> bindDepartment(
-			 @PathVariable(value = "user_id") Long userId,
-			 @PathVariable(value = "dept_id") Long deptId
+			@PathVariable(value = "user_id") Long userId,
+			@PathVariable(value = "dept_id") Long deptId
 	) {
 		return OkResponse.SAVE_SUCCESS.ret(managerUserBizService.bindDepartment(userId, deptId));
 	}
 
 	@DeleteMapping("un/department/{user_id}/{dept_id}")
 	public ResultVo<Boolean> unBindDepartment(
- @PathVariable(value = "user_id") Long userId,
-		 @PathVariable(value = "dept_id") Long deptId
+			@PathVariable(value = "user_id") Long userId,
+			@PathVariable(value = "dept_id") Long deptId
 	) {
 		return OkResponse.SAVE_SUCCESS.ret(managerUserBizService.unBindDepartment(userId, deptId));
 	}
